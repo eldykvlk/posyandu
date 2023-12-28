@@ -1,3 +1,27 @@
+export const findLocation = () => {
+         if (navigator.geolocation) {
+          navigator.geolocation.getCurrentPosition(
+            function (position) {
+              const latitude = position.coords.latitude;
+              const longitude = position.coords.longitude;
+
+              const mapsUrl = `https://www.google.com/maps/search/posyandu+terdekat/@${latitude},${longitude}`;
+
+              window.open(mapsUrl, '_blank');
+            },
+            function (error) {
+              Swal.fire({
+                title: 'upss!',
+                text: 'Gagal mendapatkan lokasi. Pastikan GPS Anda aktif!',
+                icon: 'error',
+              });
+            }
+          );
+        } else {
+          alert('Browser Anda tidak mendukung geolokasi.');
+        }
+      
+};
 
 const Mobile = {
 async render(){
@@ -74,7 +98,7 @@ async render(){
     </div>
 
 <div class="container">
-  <div class="dd"></div>
+  <div class="dd" id="lokasi"></div>
   <div class="ff"></div>
   <div class="gg"></div>
   <div class="hh"></div>
@@ -94,7 +118,8 @@ async render(){
 
 
   async afterRender() {
- 
+  const gps = document.getElementById('lokasi')
+    gps.addEventListener('click', findLocation);
 
 },
 };
