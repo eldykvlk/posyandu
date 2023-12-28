@@ -1,0 +1,236 @@
+/* Gaya Tambahan Untuk Custom Navbar */
+.navbar {
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    background-color: #5ce1e6;
+    height: 60px;
+    border-radius: 0 0 20px 20px;
+
+}
+
+
+.navbar-brand {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+    text-shadow: black;
+}
+
+.nav-link {
+    font-size: 1.2rem;
+}
+
+/* Gaya untuk bagian pertama halaman (banner) */
+.row {
+    height: 80vh;
+}
+
+.col-md-6 img {
+    object-fit: cover;
+    width: 100%;
+    height: 100%;
+}
+
+.col-md-6 p {
+    font-size: 1.2rem;
+    line-height: 1.6;
+}
+
+.btn-primary {
+    background-color: #1e2f57;
+    border-color: #1e2f57;
+    color: #fff;
+    margin-top: 1rem;
+}
+
+.btn-primary:hover {
+    background-color: #29417f;
+    border-color: #29417f;
+    color: #fff;
+}
+
+/* Gaya tambahan untuk membuat gambar carousel responsif di mode desktop */
+@media (min-width: 768px){
+ #carouselExampleControls {
+        display: none;
+    }
+ #navigasimobile {
+    display: none;
+ }
+
+}
+
+
+
+
+.carousel-inner .carousel-item img {
+    border-radius: 20px; 
+}
+
+.carousel.pointer-event {
+    -ms-touch-action: pan-y;
+    touch-action: pan-y;
+    width: 90%;
+    margin: auto;
+    margin-top: 100px;
+    }
+
+.navbar-light .navbar-brand {
+    color: white;
+}
+
+.navbar-toggler {
+    padding: .25rem .75rem;
+    font-size: 1.25rem;
+    line-height: 1;
+    background-color: white;
+    border: 1px solid transparent;
+    border-radius: .25rem;
+}
+
+.navbar-light .navbar-brand {
+    color: white;
+    font-size: 30px;
+}
+
+.satu {
+    background-color: red;
+    width: 70px;
+    height: 70px;
+    position: relative;
+    top: 70px;
+}
+
+.dua{
+    background-color: green;
+    width: 70px;
+    height: 70px;
+    position: absolute;
+    top: 0;
+    left: 0;
+}
+
+.tiga{
+    background-color: blue;
+    width: 70px;
+    height: 70px;
+    position: relative;
+    left: 70px;
+}
+
+
+
+.container {         
+       width: 80%;
+    height: 300px;
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 15px 15px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "dd ff"
+        "gg hh";
+}
+
+.dd { grid-area: dd; }
+
+.ff { grid-area: ff; }
+
+.gg { grid-area: gg; }
+
+.hh { grid-area: hh; }
+
+ .gg{
+grid-area: gg;
+background-image: url('../public/images/artikel.png');
+    border-radius: 20px;
+    background-size: cover;
+}
+
+ .dd{
+grid-area: dd;
+background-image: url('../public/images/terdekat.png');
+    border-radius: 20px;
+    background-size: cover;
+}
+
+ .ff{
+grid-area: ff;
+background-image: url('../public/images/pengumuman.png');
+    border-radius: 20px;
+    background-size: cover;
+}
+
+ .hh{
+grid-area: hh;
+background-image: url('../public/images/informasi.png');
+    border-radius: 20px;
+    background-size: cover;
+}
+
+
+
+
+
+
+
+ .mobile-footer {
+    background-color: pink;
+    color: #fff;
+    position: fixed;
+    bottom: 20px;
+    left: 0;
+    height: 50px;
+    width: 90%;
+    padding: 10px 0;
+    margin-bottom: 20px;
+    border-radius: 50px;
+    margin: auto;
+    margin-left: 5%;
+  }
+
+ .mobile-footer img {
+    width: 35px;
+    margin: 0 40px;
+}
+
+.wrapper {
+    margin-top: 50px;
+  display: flex; /* Membuat elemen menjadi flexbox */
+  overflow-x: auto; /* Mengaktifkan scroll horizontal jika konten melebihi lebar wrapper */
+  white-space: nowrap; /* Menghindari pemisahan baris di dalam wrapper */
+}
+
+.item1, .item2, .item3 {
+  width: 45%; /* Setiap elemen memiliki lebar 45% dari wrapper */
+  flex-shrink: 0; /* Menghindari penyusutan elemen jika ruang terbatas */
+  margin-right: 5%; /* Memberi jarak antar elemen */
+  box-sizing: border-box; /* Menghitung padding dan border ke dalam lebar elemen */
+  height: 80px;
+}
+
+/* Hanya untuk tampilan demo */
+.item1 {
+background-image: url('../public/images/kontak.png');
+background-size: cover;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.item2 {
+background-image: url('../public/images/panduan.png');
+background-size: cover;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.item3 {
+background-image: url('../public/images/login.png');
+background-size: cover;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+}
