@@ -121,7 +121,11 @@ async render(){
   const gps = document.getElementById('lokasi')
     gps.addEventListener('click', findLocation);
 
-},
+const ggDiv = document.querySelector('.gg');
+    ggDiv.addEventListener('click', () => {
+      window.location.href = 'https://ayosehat.kemkes.go.id/home';
+    });
+  },
 };
 
 export default Mobile;
