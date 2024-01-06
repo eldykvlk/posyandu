@@ -125,6 +125,11 @@ const ggDiv = document.querySelector('.gg');
     ggDiv.addEventListener('click', () => {
       window.location.href = 'https://ayosehat.kemkes.go.id/home';
     });
+
+const ffDiv = document.querySelector('.ff');
+    ffDiv.addEventListener('click', () => {
+      window.location.href = 'pengumuman-page-user.html';
+    });
   },
 };
 

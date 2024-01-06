@@ -1,7 +1,7 @@
 const HtmlWebpackPlugin = require('html-webpack-plugin');
 const CopyWebpackPlugin = require('copy-webpack-plugin');
 const path = require('path');
- 
+
 module.exports = {
   entry: {
     app: path.resolve(__dirname, 'src/scripts/index.js'),
@@ -24,12 +24,25 @@ module.exports = {
           },
         ],
       },
+      {
+        test: /\.html$/,
+        use: [
+          {
+            loader: 'html-loader',
+          },
+        ],
+      },
     ],
   },
   plugins: [
     new HtmlWebpackPlugin({
       filename: 'index.html',
       template: path.resolve(__dirname, 'src/templates/index.html'),
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'pengumuman-page-user.html',
+      template: path.resolve(__dirname, 'src/scripts/views/pages/pengumuman-page-user.html'),
+      inject: false,
     }),
     new CopyWebpackPlugin({
       patterns: [

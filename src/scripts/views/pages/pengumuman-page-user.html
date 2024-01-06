@@ -1,0 +1,99 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengumuman Page User</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+<style>
+  
+        body {
+            background: #8FB4E1; /* Warna biru soft */
+        }
+
+.container {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin-bottom: -130px;
+}
+
+        .card {
+            background: rgba(255, 255, 255, 0.9); /* Warna putih transparan */
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Add your custom styles here */
+        .form-group-wide {
+            max-width: 400px;
+        }
+
+
+
+h3#h3pengumuman {
+    text-align: center;
+}
+</style>
+</head>
+
+<body class="userinfo">
+
+<div class="container mt-5">
+    <div class="card p-4">
+        <form>
+            <h3 id="h3pengumuman">Pengumuman Posyandu Eddelweis</h3>
+            <div class="form-group">
+                <label for="tanggalBerita">Tanggal Berita:</label>
+                <input type="text" class="form-control" id="tanggalBerita" readonly>
+            </div>
+
+            <div class="form-group">
+                <label for="judulPengumuman">Judul Pengumuman:</label>
+                <input type="text" class="form-control" id="judulPengumuman" readonly>
+            </div>
+
+            <div class="form-group form-group-wide">
+                <label for="isiPengumuman">Isi Pengumuman:</label>
+                <textarea class="form-control" id="isiPengumuman" rows="4" readonly></textarea>
+            </div>
+
+            <div class="text-center">
+                <button type="button" class="btn btn-primary mr-2" hidden onclick="updateData()">Ubah Pengumuman</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+  
+
+ function getData() {
+        fetch('https://posyandu-4c84d-default-rtdb.firebaseio.com/pengumuman.json')
+            .then(response => response.json())
+            .then(data => {
+                // Process the retrieved data here
+                const pengumuman = data["-NnQwb5d3c3GQNkHdsNY"];
+                document.getElementById("tanggalBerita").value = pengumuman.date;
+                document.getElementById("judulPengumuman").value = pengumuman.jdl_berita;
+                document.getElementById("isiPengumuman").value = pengumuman.isi_berita;
+            })
+            .catch(error => {
+                console.log('Error:', error);
+            });
+    }
+
+    // Call the getData() function when the page loads
+    window.addEventListener('DOMContentLoaded', getData);
+</script>
+</body>
+</html>
+
+
+
