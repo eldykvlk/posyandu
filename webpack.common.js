@@ -44,6 +44,11 @@ module.exports = {
       template: path.resolve(__dirname, 'src/scripts/views/pages/pengumuman-page-user.html'),
       inject: false,
     }),
+    new HtmlWebpackPlugin({
+      filename: 'login.html',
+      template: path.resolve(__dirname, 'src/scripts/views/pages/login.html'),
+      inject: false,
+    }),
     new CopyWebpackPlugin({
       patterns: [
         {

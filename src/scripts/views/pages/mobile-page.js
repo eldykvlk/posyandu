@@ -23,6 +23,9 @@ export const findLocation = () => {
       
 };
 
+
+
+
 const Mobile = {
 async render(){
 	return `
@@ -94,7 +97,7 @@ async render(){
     <div class="wrapper">
       <div class="item1" styles="background-images : url('imgmobile/kontak.png');">1</div>
       <div class="item2">2</div>
-       <div class="item3">3</div> 
+      <div class="item3">3</div>
     </div>
 
 <div class="container">
@@ -118,6 +121,9 @@ async render(){
 
 
   async afterRender() {
+
+
+
   const gps = document.getElementById('lokasi')
     gps.addEventListener('click', findLocation);
 
@@ -130,6 +136,11 @@ const ffDiv = document.querySelector('.ff');
     ffDiv.addEventListener('click', () => {
       window.location.href = 'pengumuman-page-user.html';
     });
+
+const login = document.querySelector('.item3');
+    login.addEventListener('click', () => {
+      window.location.href = 'login.html';
+    });    
   },
 };
 
