@@ -97,7 +97,7 @@ async render(){
     <div class="wrapper">
       <div class="item1" styles="background-images : url('imgmobile/kontak.png');">1</div>
       <div class="item2">2</div>
-      <div class="item3">3</div>
+     <div class="item3" id="logoutButton">3</div>
     </div>
 
 <div class="container">
@@ -137,10 +137,15 @@ const ffDiv = document.querySelector('.ff');
       window.location.href = 'pengumuman-page-user.html';
     });
 
-const login = document.querySelector('.item3');
-    login.addEventListener('click', () => {
-      window.location.href = 'login.html';
-    });    
+  // Add an event listener to the "Logout" button
+        const logoutButton = document.getElementById('logoutButton');
+        logoutButton.addEventListener('click', () => {
+            // Clear the session storage item indicating admin status
+            sessionStorage.removeItem('isAdmin');
+            // Redirect to the "/" route
+            window.location.href = '/';
+        });
+
   },
 };
 

@@ -122,6 +122,13 @@ async render(){
 
   async afterRender() {
 
+        // Check if the user is an admin based on the session storage item
+        const isAdmin = sessionStorage.getItem("isAdmin");
+
+        if (isAdmin === "true") {
+            // Redirect to the admin page
+            window.location.href = '/#/admin';
+        }
 
 
   const gps = document.getElementById('lokasi')
