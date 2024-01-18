@@ -37,7 +37,7 @@ async render(){
     </button>
     <div class="offcanvas offcanvas-end" tabindex="-1" id="offcanvasNavbar" aria-labelledby="offcanvasNavbarLabel">
       <div class="offcanvas-header">
-        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Offcanvas</h5>
+        <h5 class="offcanvas-title" id="offcanvasNavbarLabel">Menu Aplikasi</h5>
         <button type="button" class="btn-close" data-bs-dismiss="offcanvas" aria-label="Close"></button>
       </div>
       <div class="offcanvas-body">
@@ -46,26 +46,18 @@ async render(){
             <a class="nav-link active" aria-current="page" href="#">Home</a>
           </li>
           <li class="nav-item">
-            <a class="nav-link" href="#">Link</a>
+            <a class="nav-link" href="#">Info Aplikasi</a>
           </li>
           <li class="nav-item dropdown">
             <a class="nav-link dropdown-toggle" href="#" role="button" data-bs-toggle="dropdown" aria-expanded="false">
-              Dropdown
+              Fitur Utama Admin
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Action</a></li>
-              <li><a class="dropdown-item" href="#">Another action</a></li>
-              <li>
-                <hr class="dropdown-divider">
-              </li>
-              <li><a class="dropdown-item" href="#">Something else here</a></li>
+              <li><a class="dropdown-item" href="#">Catat Pengumuman</a></li>
+              <li><a class="dropdown-item" href="#">Catat Pelayanan</a></li>
             </ul>
           </li>
         </ul>
-        <form class="d-flex mt-3" role="search">
-          <input class="form-control me-2" type="search" placeholder="Search" aria-label="Search">
-          <button class="btn btn-outline-success" type="submit">Search</button>
-        </form>
       </div>
     </div>
   </div>
@@ -94,17 +86,17 @@ async render(){
         </a>
     </div>
 
-    <div class="wrapper">
-      <div class="item1" styles="background-images : url('imgmobile/kontak.png');">1</div>
+    <div class="wrapper" id="wrapperadmin">
+      <div class="item1">1</div>
       <div class="item2">2</div>
      <div class="item3" id="logoutButton">3</div>
     </div>
 
-<div class="container">
+<div class="container" id="contadmin">
   <div class="dd" id="lokasi"></div>
   <div class="ff"></div>
   <div class="gg"></div>
-  <div class="hh"></div>
+  <div class="ii"></div>
 </div>
 
 <br><br><br>

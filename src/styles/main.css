@@ -133,6 +133,22 @@
         "gg hh";
 }
 
+.container#contadmin {         
+       width: 80%;
+    height: 300px;
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: 1fr 1fr;
+    gap: 15px 15px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "dd ff"
+        "gg ii";
+}
+
+
+
 .dd { grid-area: dd; }
 
 .ff { grid-area: ff; }
@@ -140,6 +156,15 @@
 .gg { grid-area: gg; }
 
 .hh { grid-area: hh; }
+
+.ii { grid-area: ii; }
+
+ .ii{
+grid-area: ii;
+background-image: url('../public/images/catatan.png');
+    border-radius: 20px;
+    background-size: cover;
+}
 
  .gg{
 grid-area: gg;
@@ -202,7 +227,7 @@ background-image: url('../public/images/informasi.png');
   white-space: nowrap; /* Menghindari pemisahan baris di dalam wrapper */
 }
 
-.item1, .item2, .item3 {
+.item1, .item2, .item3, .item3#logoutButton {
   width: 45%; /* Setiap elemen memiliki lebar 45% dari wrapper */
   flex-shrink: 0; /* Menghindari penyusutan elemen jika ruang terbatas */
   margin-right: 5%; /* Memberi jarak antar elemen */
@@ -212,7 +237,7 @@ background-image: url('../public/images/informasi.png');
 
 /* Hanya untuk tampilan demo */
 .item1 {
-background-image: url('../public/images/kontak.png');
+background-image: url('../public/images/bagikan.png');
 background-size: cover;
   padding: 15px;
   text-align: center;
@@ -229,6 +254,14 @@ background-size: cover;
 
 .item3 {
 background-image: url('../public/images/login.png');
+background-size: cover;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.item3#logoutButton {
+background-image: url('../public/images/logout.png');
 background-size: cover;
   padding: 15px;
   text-align: center;
