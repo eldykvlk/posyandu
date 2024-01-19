@@ -43,7 +43,7 @@ async render(){
       <div class="offcanvas-body">
         <ul class="navbar-nav justify-content-end flex-grow-1 pe-3">
           <li class="nav-item">
-            <a class="nav-link active" aria-current="page" href="#">Home</a>
+            <a class="nav-link active" aria-current="page" href="#/">Home</a>
           </li>
           <li class="nav-item">
             <a class="nav-link" href="#">Info Aplikasi</a>
@@ -54,7 +54,7 @@ async render(){
             </a>
             <ul class="dropdown-menu">
               <li><a class="dropdown-item" href="#">Catat Pengumuman</a></li>
-              <li><a class="dropdown-item" href="#">Catat Pelayanan</a></li>
+              <li><a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbwvxkszbmmgUDABEVNdt--an3iuF-t7HFiCSNFJstUyTSslcoP8rdM8M0VKl4XNPnbA/exec">Catat Pelayanan</a></li>
             </ul>
           </li>
         </ul>
@@ -103,7 +103,7 @@ async render(){
 
 <footer class="mobile-footer">
   <div class="footer text-center">
-    <img src="images/home.png" alt="Home Logo">
+    <img src="images/home.png" alt="Home Logo" class="footer-home">
     <img id="info" src="images/info.png" alt="Info Logo">
   </div>
   <br><br>
@@ -114,7 +114,17 @@ async render(){
 
   async afterRender() {
 
+ // Check if the user is an admin based on the session storage item
+    const isAdminSession = sessionStorage.getItem("isAdmin");
 
+    // Check if the user is an admin based on the local storage item
+    const isAdminLocal = localStorage.getItem("isAdmin");
+
+    // If neither session nor local storage isAdmin exists, redirect to "/"
+    if (!isAdminSession && !isAdminLocal) {
+        window.location.href = '/';
+        return; // Optional: Stop further execution, if needed
+    }
 
   const gps = document.getElementById('lokasi')
     gps.addEventListener('click', findLocation);
@@ -129,11 +139,23 @@ const ffDiv = document.querySelector('.ff');
       window.location.href = 'pengumuman-page-user.html';
     });
 
+const iiDiv = document.querySelector('.ii');
+    iiDiv.addEventListener('click', () => {
+      window.location.href = 'https://script.google.com/macros/s/AKfycbwvxkszbmmgUDABEVNdt--an3iuF-t7HFiCSNFJstUyTSslcoP8rdM8M0VKl4XNPnbA/exec';
+    });
+
+const footerHome = document.querySelector('.footer-home');
+    footerHome.addEventListener('click', () => {
+      window.location.href = '/';
+    });
+
   // Add an event listener to the "Logout" button
         const logoutButton = document.getElementById('logoutButton');
         logoutButton.addEventListener('click', () => {
             // Clear the session storage item indicating admin status
             sessionStorage.removeItem('isAdmin');
+            // Clear the local storage item indicating admin status
+            localStorage.removeItem('isAdmin');
             // Redirect to the "/" route
             window.location.href = '/';
         });

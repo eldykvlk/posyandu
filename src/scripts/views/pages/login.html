@@ -30,23 +30,27 @@
         const auth = getAuth();
 
         function loginWithGoogle() {
-            var provider = new GoogleAuthProvider();
-            signInWithPopup(auth, provider).then(function(result) {
-                // Check if the logged-in user's email is "posyanduedellweis@gmail.com"
-                if (result.user.email === "posyanduedellweis@gmail.com") {
-                    // Set a session or local storage item to indicate admin login
-                    sessionStorage.setItem("isAdmin", "true");
-                    window.location.href = "/#/admin";
-                } else {
-                    // Display an error message or perform any other action for failed login
-                    displayErrorAlert("Invalid email. Login failed.");
-                }
-            }).catch(function(error) {
-                console.error("Error during Google login:", error);
+        var provider = new GoogleAuthProvider();
+        signInWithPopup(auth, provider).then(function(result) {
+            // Check if the logged-in user's email is "posyanduedellweis@gmail.com"
+            if (result.user.email === "posyanduedellweis@gmail.com") {
+                // Set a session storage item to indicate admin login
+                sessionStorage.setItem("isAdmin", "true");
+
+                // Set a local storage item for caching
+                localStorage.setItem("isAdmin", "true");
+
+                window.location.href = "/#/admin";
+            } else {
                 // Display an error message or perform any other action for failed login
-                displayErrorAlert("Error during Google login.");
-            });
-        }
+                displayErrorAlert("Invalid email. Login failed.");
+            }
+        }).catch(function(error) {
+            console.error("Error during Google login:", error);
+            // Display an error message or perform any other action for failed login
+            displayErrorAlert("Error during Google login.");
+        });
+    }
 
         function displayErrorAlert(message) {
             const errorDiv = document.getElementById("errorDiv");

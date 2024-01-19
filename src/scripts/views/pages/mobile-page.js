@@ -53,8 +53,8 @@ async render(){
               Fitur Utama User
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Lihat Pengumuman</a></li>
-              <li><a class="dropdown-item" href="#">Baca Artikel kesehatan</a></li>
+              <li><a class="dropdown-item" href="pengumuman-page-user.html">Lihat Pengumuman</a></li>
+              <li><a class="dropdown-item" href="https://ayosehat.kemkes.go.id/home">Baca Artikel kesehatan</a></li>
             </ul>
           </li>
         </ul>
@@ -103,7 +103,7 @@ async render(){
 
 <footer class="mobile-footer">
   <div class="footer text-center">
-    <img src="images/home.png" alt="Home Logo">
+    <img src="images/home.png" alt="Home Logo" class="footer-home">
     <img id="info" src="images/info.png" alt="Info Logo">
   </div>
   <br><br>
@@ -114,10 +114,12 @@ async render(){
 
   async afterRender() {
 
-        // Check if the user is an admin based on the session storage item
-        const isAdmin = sessionStorage.getItem("isAdmin");
+  const isAdminSession = sessionStorage.getItem("isAdmin");
 
-        if (isAdmin === "true") {
+        // Check if the user is an admin based on the local storage item
+        const isAdminLocalStorage = localStorage.getItem("isAdmin");
+
+        if (isAdminSession === "true" || isAdminLocalStorage === "true") {
             // Redirect to the admin page
             window.location.href = '/#/admin';
         }
@@ -139,7 +141,12 @@ const ffDiv = document.querySelector('.ff');
 const login = document.querySelector('.item3');
     login.addEventListener('click', () => {
       window.location.href = 'login.html';
-    });    
+    }); 
+
+const footerHome = document.querySelector('.footer-home');
+    footerHome.addEventListener('click', () => {
+      window.location.href = '/';
+    });   
   },
 };
 
