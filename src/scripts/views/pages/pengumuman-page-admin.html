@@ -1,0 +1,104 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Pengumuman Page</title>
+    <!-- Bootstrap CSS -->
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/css/bootstrap.min.css">
+    
+</head>
+<body>
+
+<div class="container mt-5" id="pengumuman-admin">
+    <div class="card p-4" id="card-pengumuman-admin" style="background-color: #8FB4E1; border-radius: 15px;">
+        <form>
+            <div class="form-group">
+                <label for="tanggalBerita">Tanggal Berita:</label>
+                <input type="date" class="form-control" id="tanggalBerita" placeholder="Masukkan Tanggal Berita">
+            </div>
+
+            <div class="form-group">
+                <label for="judulPengumuman">Judul Pengumuman:</label>
+                <input type="text" class="form-control" id="judulPengumuman" placeholder="Masukkan Judul Pengumuman">
+            </div>
+
+            <div class="form-group form-group-wide">
+                <label for="isiPengumuman">Isi Pengumuman:</label>
+                <textarea class="form-control" id="isiPengumuman" rows="4" placeholder="Masukkan Isi Pengumuman"></textarea>
+            </div>
+
+            <div class="text-center">
+                <button type="button" class="btn btn-primary mr-2" id="btnp-pengumuman-admin" onclick="updateData()">Ubah Pengumuman</button>
+            </div>
+        </form>
+    </div>
+</div>
+
+<!-- Bootstrap JS and Popper.js -->
+<script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
+<script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
+<script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
+<script>
+    function updateData() {
+        const tanggalBerita = document.getElementById("tanggalBerita").value;
+        const judulPengumuman = document.getElementById("judulPengumuman").value;
+        const isiPengumuman = document.getElementById("isiPengumuman").value;
+
+        const data = {
+            "-NnQwb5d3c3GQNkHdsNY": {
+                "date": tanggalBerita,
+                "isi_berita": isiPengumuman,
+                "jdl_berita": judulPengumuman
+            }
+        };
+
+        fetch('https://posyandu-4c84d-default-rtdb.firebaseio.com/pengumuman.json?auth=JnMrZlS3mYhtzsCOIEpGoiTW9SaY781xLV6MEvxF', {
+            method: 'PUT',
+            body: JSON.stringify(data)
+        })
+        .then(response => response.json())
+        .then(data => {
+            console.log('Data updated successfully:', data);
+            showSuccessAlert();
+        })
+        .catch(error => {
+            console.log('Error:', error);
+        });
+    }
+
+    function showSuccessAlert() {
+        const alertContainer = document.createElement("div");
+        alertContainer.classList.add("alert", "alert-success", "mt-4");
+        alertContainer.innerHTML = `
+            <button type="button" class="close" data-dismiss="alert" aria-label="Close">
+                <span aria-hidden="true">&times;</span>
+            </button>
+            Berhasil ubah pengumuman
+        `;
+        document.body.appendChild(alertContainer);
+    }
+
+ function getData() {
+        fetch('https://posyandu-4c84d-default-rtdb.firebaseio.com/pengumuman.json?auth=JnMrZlS3mYhtzsCOIEpGoiTW9SaY781xLV6MEvxF')
+            .then(response => response.json())
+            .then(data => {
+                // Process the retrieved data here
+                const pengumuman = data["-NnQwb5d3c3GQNkHdsNY"];
+                document.getElementById("tanggalBerita").value = pengumuman.date;
+                document.getElementById("judulPengumuman").value = pengumuman.jdl_berita;
+                document.getElementById("isiPengumuman").value = pengumuman.isi_berita;
+            })
+            .catch(error => {
+                console.log('Error:', error);
+            });
+    }
+
+    // Call the getData() function when the page loads
+    window.addEventListener('DOMContentLoaded', getData);
+</script>
+</body>
+</html>
+
+
+

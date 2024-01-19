@@ -53,7 +53,7 @@ async render(){
               Fitur Utama Admin
             </a>
             <ul class="dropdown-menu">
-              <li><a class="dropdown-item" href="#">Catat Pengumuman</a></li>
+              <li><a class="dropdown-item" href="pengumuman-page-admin.html">Catat Pengumuman</a></li>
               <li><a class="dropdown-item" href="https://script.google.com/macros/s/AKfycbwvxkszbmmgUDABEVNdt--an3iuF-t7HFiCSNFJstUyTSslcoP8rdM8M0VKl4XNPnbA/exec">Catat Pelayanan</a></li>
             </ul>
           </li>
@@ -94,7 +94,7 @@ async render(){
 
 <div class="container" id="contadmin">
   <div class="dd" id="lokasi"></div>
-  <div class="ff"></div>
+  <div class="ff" id="pengumuman-admin"></div>
   <div class="gg"></div>
   <div class="ii"></div>
 </div>
@@ -134,9 +134,9 @@ const ggDiv = document.querySelector('.gg');
       window.location.href = 'https://ayosehat.kemkes.go.id/home';
     });
 
-const ffDiv = document.querySelector('.ff');
-    ffDiv.addEventListener('click', () => {
-      window.location.href = 'pengumuman-page-user.html';
+const ffadmDiv = document.querySelector('.ff#pengumuman-admin');
+    ffadmDiv.addEventListener('click', () => {
+      window.location.href = 'pengumuman-page-admin.html';
     });
 
 const iiDiv = document.querySelector('.ii');

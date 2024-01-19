@@ -1,12 +1,15 @@
 /* Gaya Tambahan Untuk Custom Navbar */
 .navbar {
     box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #5ce1e6;
+    background-color: #f27474cf;
     height: 60px;
     border-radius: 0 0 20px 20px;
 
 }
 
+body{
+    
+}
 
 .navbar-brand {
     font-size: 1.5rem;
@@ -266,4 +269,43 @@ background-size: cover;
   padding: 15px;
   text-align: center;
   border-radius: 10px;
+}
+
+div#card-pengumuman-admin {
+    background-color: #8FB4E1;
+    border-radius: 15px;
+}
+
+.container#pengumuman-admin {
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    height: 100vh;
+    margin-bottom: -130px;
+}
+
+        .card#card-pengumuman-admin {
+            background: rgba(255, 255, 255, 0.9); /* Warna putih transparan */
+            border-radius: 15px;
+            box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1), 0 10px 15px rgba(0, 0, 0, 0.1);
+        }
+
+        /* Add your custom styles here */
+        .form-group-wide {
+            max-width: 400px;
+        }
+
+.btn-primary#btnp-pengumuman-admin {
+    margin: 5px;
+    color: #fff;
+    background-color: #007bff;
+    border-color: #007bff;
+}
+
+.btn-danger {
+    color: #fff;
+    background-color: #dc3545;
+    border-color: #dc3545;
+    margin: auto;
+    margin: 5px;
 }
