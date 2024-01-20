@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -11,7 +12,7 @@
         // Import the functions you need from the SDKs you need
         import { initializeApp } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-app.js";
         import { getAnalytics } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-analytics.js";
-        import { getAuth, GoogleAuthProvider, signInWithPopup } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
+        import { getAuth, GoogleAuthProvider, onAuthStateChanged, signInWithRedirect } from "https://www.gstatic.com/firebasejs/10.7.1/firebase-auth.js";
 
         // Your web app's Firebase configuration
         const firebaseConfig = {
@@ -29,28 +30,26 @@
         const analytics = getAnalytics(app);
         const auth = getAuth();
 
-        function loginWithGoogle() {
-        var provider = new GoogleAuthProvider();
-        signInWithPopup(auth, provider).then(function(result) {
-            // Check if the logged-in user's email is "posyanduedellweis@gmail.com"
-            if (result.user.email === "posyanduedellweis@gmail.com") {
-                // Set a session storage item to indicate admin login
-                sessionStorage.setItem("isAdmin", "true");
+        // Tambahkan fungsi untuk memeriksa status login
+        onAuthStateChanged(auth, (user) => {
+            if (user) {
+                // Check if the logged-in user's email is "posyanduedellweis@gmail.com"
+                if (user.email === "posyanduedellweis@gmail.com") {
+                    // Set a session storage item to indicate admin login
+                    sessionStorage.setItem("isAdmin", "true");
 
-                // Set a local storage item for caching
-                localStorage.setItem("isAdmin", "true");
+                    // Set a local storage item for caching
+                    localStorage.setItem("isAdmin", "true");
 
-                window.location.href = "/#/admin";
-            } else {
-                // Display an error message or perform any other action for failed login
-                displayErrorAlert("Invalid email. Login failed.");
+                    window.location.href = "/#/admin";
+                }
             }
-        }).catch(function(error) {
-            console.error("Error during Google login:", error);
-            // Display an error message or perform any other action for failed login
-            displayErrorAlert("Error during Google login.");
         });
-    }
+
+        function loginWithGoogle() {
+            var provider = new GoogleAuthProvider();
+            signInWithRedirect(auth, provider);
+        }
 
         function displayErrorAlert(message) {
             const errorDiv = document.getElementById("errorDiv");
@@ -60,20 +59,21 @@
         }
 
         // Add event listener to the button
-        window.onload = function() {
+        window.onload = function () {
             const loginButton = document.getElementById("loginButton");
             loginButton.addEventListener("click", loginWithGoogle);
         }
     </script>
 </head>
+
 <body class="bg-light">
     <div class="container d-flex align-items-center justify-content-center" style="min-height: 100vh;">
         <div class="card text-center">
             <div class="card-body">
                 <h1 class="card-title">Login dengan Google</h1>
                 <button id="loginButton" class="btn btn-primary">
-                    <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Logo" style="margin-right: 10px;">
-                    Login dengan Google
+                    <img src="https://img.icons8.com/color/48/000000/google-logo.png" alt="Google Logo"
+                        style="margin-right: 10px;"> Login dengan Google
                 </button>
                 <div id="errorDiv" class="alert alert-danger mt-3" style="display: none;">
                     <strong>Error:</strong> <span id="errorText"></span>
@@ -89,7 +89,7 @@
     <script src="https://code.jquery.com/jquery-3.2.1.slim.min.js"></script>
     <script src="https://cdnjs.cloudflare.com/ajax/libs/popper.js/1.12.9/umd/popper.min.js"></script>
     <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.0.0/js/bootstrap.min.js"></script>
-    
+
     <script>
         function closeErrorAlert() {
             const errorDiv = document.getElementById("errorDiv");
@@ -97,4 +97,5 @@
         }
     </script>
 </body>
+
 </html>
