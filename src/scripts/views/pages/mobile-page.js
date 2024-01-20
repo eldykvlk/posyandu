@@ -1,31 +1,3 @@
-export const findLocation = () => {
-         if (navigator.geolocation) {
-          navigator.geolocation.getCurrentPosition(
-            function (position) {
-              const latitude = position.coords.latitude;
-              const longitude = position.coords.longitude;
-
-              const mapsUrl = `https://www.google.com/maps/search/posyandu+terdekat/@${latitude},${longitude}`;
-
-              window.open(mapsUrl, '_blank');
-            },
-            function (error) {
-              Swal.fire({
-                title: 'upss!',
-                text: 'Gagal mendapatkan lokasi. Pastikan GPS Anda aktif!',
-                icon: 'error',
-              });
-            }
-          );
-        } else {
-          alert('Browser Anda tidak mendukung geolokasi.');
-        }
-      
-};
-
-
-
-
 const Mobile = {
 async render(){
 	return `
@@ -126,7 +98,9 @@ async render(){
 
 
   const gps = document.getElementById('lokasi')
-    gps.addEventListener('click', findLocation);
+    gps.addEventListener('click', () => {
+      window.location.href = 'https://www.google.com/maps/search/posyandu+terdekat/';
+    });
 
 const ggDiv = document.querySelector('.gg');
     ggDiv.addEventListener('click', () => {
