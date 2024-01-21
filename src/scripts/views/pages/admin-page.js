@@ -122,16 +122,6 @@ const footerHome = document.querySelector('.footer-home');
           window.ReactNativeWebView.postMessage(JSON.stringify({ action: 'logout' }));
         });
 
-        // Add an event listener to the window object to listen for messages from the React Native code
-        window.addEventListener('message', (event) => {
-          const data = JSON.parse(event.data);
-          if (data.action === 'navigate') {
-            // Navigate to the specified destination
-            if (data.destination === 'Start') {
-              window.location.href = '/start';
-            }
-          }
-        });
 
 
   },
