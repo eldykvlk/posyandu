@@ -114,11 +114,13 @@ const footerHome = document.querySelector('.footer-home');
     });
 
   // Add an event listener to the "Logout" button
-        const logoutButton = document.getElementById('logoutButton');
-        logoutButton.addEventListener('click', () => {
-            // Redirect to the "/" route
-            window.location.href = '/';
-        });
+// components/Admin.js
+const logoutButton = document.getElementById('logoutButton');
+logoutButton.addEventListener('click', () => {
+  // Kirim pesan ke WebView di React Native untuk melakukan logout
+  window.ReactNativeWebView.postMessage(JSON.stringify({ action: 'logout' }));
+});
+
 
   },
 };
