@@ -86,17 +86,6 @@ async render(){
 
   async afterRender() {
 
- // Check if the user is an admin based on the session storage item
-    const isAdminSession = sessionStorage.getItem("isAdmin");
-
-    // Check if the user is an admin based on the local storage item
-    const isAdminLocal = localStorage.getItem("isAdmin");
-
-    // If neither session nor local storage isAdmin exists, redirect to "/"
-    if (!isAdminSession && !isAdminLocal) {
-        window.location.href = '/';
-        return; // Optional: Stop further execution, if needed
-    }
 
   const gps = document.getElementById('lokasi')
     gps.addEventListener('click', () => {
@@ -127,10 +116,6 @@ const footerHome = document.querySelector('.footer-home');
   // Add an event listener to the "Logout" button
         const logoutButton = document.getElementById('logoutButton');
         logoutButton.addEventListener('click', () => {
-            // Clear the session storage item indicating admin status
-            sessionStorage.removeItem('isAdmin');
-            // Clear the local storage item indicating admin status
-            localStorage.removeItem('isAdmin');
             // Redirect to the "/" route
             window.location.href = '/';
         });
