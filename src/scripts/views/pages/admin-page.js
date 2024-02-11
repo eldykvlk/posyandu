@@ -1,7 +1,7 @@
 const Admin = {
 async render(){
 	return `
-<br><br>
+
 
 
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
