@@ -53,6 +53,20 @@ async render(){
 
   async afterRender() {
 
+        // Mencari elemen tombol "Next" dari carousel
+        const nextButton = document.querySelector('.carousel-control-next');
+
+        // Men-trigger klik pertama pada tombol "Next" setelah 2 detik
+        setTimeout(() => {
+            nextButton.click();
+        }, 2000);
+
+        // Men-trigger klik pada tombol "Next" setiap 5 detik
+        setInterval(() => {
+            nextButton.click();
+        }, 5000);
+
+
   const isAdminSession = sessionStorage.getItem("isAdmin");
 
         // Check if the user is an admin based on the local storage item

@@ -54,7 +54,19 @@ async render(){
 
   async afterRender() {
 
+        // Mencari elemen tombol "Next" dari carousel
+        const nextButton = document.querySelector('.carousel-control-next');
 
+        // Men-trigger klik pertama pada tombol "Next" setelah 2 detik
+        setTimeout(() => {
+            nextButton.click();
+        }, 2000);
+
+        // Men-trigger klik pada tombol "Next" setiap 5 detik
+        setInterval(() => {
+            nextButton.click();
+        }, 5000);
+        
   const gps = document.getElementById('lokasi')
     gps.addEventListener('click', () => {
       window.location.href = 'https://www.google.com/maps/search/posyandu+terdekat/';
