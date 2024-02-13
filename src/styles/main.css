@@ -1,26 +1,13 @@
-/* Gaya Tambahan Untuk Custom Navbar */
-.navbar {
-    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
-    background-color: #f27474cf;
-    height: 60px;
-    border-radius: 0 0 20px 20px;
 
-}
+
 
 body{
-    
+      margin-top: -20%;  
 }
 
-.navbar-brand {
-    font-size: 1.5rem;
-    font-weight: bold;
-    color: white;
-    text-shadow: black;
-}
 
-.nav-link {
-    font-size: 1.2rem;
-}
+
+
 
 /* Gaya untuk bagian pertama halaman (banner) */
 .row {
