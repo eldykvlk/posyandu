@@ -33,7 +33,7 @@ async render(){
   <div class="dd" id="lokasi"></div>
   <div class="ff"></div>
   <div class="gg"></div>
-<div class="hh" onclick="window.open('#/info+posyandu', '_blank')"></div>
+<div class="hh" onclick="window.open('#/info+posyandu')"></div>
 
 </div>
 
