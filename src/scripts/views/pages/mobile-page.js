@@ -24,9 +24,8 @@ const Mobile = {
     </div>
 
     <div class="wrapper">
-      <div class="item1" styles="background-images : url('imgmobile/kontak.png');">1</div>
-      <div class="item2">2</div>
-      <div class="item3">3</div>
+      <div class="item1" styles="background-images : url('imgmobile/kontak.png');"></div>
+      <div class="item2"></div>
     </div>
 
     <div class="container">
@@ -86,10 +85,6 @@ const Mobile = {
       window.location.href = 'pengumuman-page-user.html';
     });
 
-    const login = document.querySelector('.item3');
-    login.addEventListener('click', () => {
-      window.location.href = 'login.html';
-    });
 
     const footerHome = document.querySelector('.footer-home');
     footerHome.addEventListener('click', () => {

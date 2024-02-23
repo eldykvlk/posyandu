@@ -27,9 +27,8 @@ async render(){
     </div>
 
     <div class="wrapper" id="wrapperadmin">
-      <div class="item1">1</div>
-      <div class="item2">2</div>
-     <div class="item3" id="logoutButton">3</div>
+      <div class="item1"></div>
+      <div class="item2"></div>
     </div>
 
 <div class="container" id="contadmin">
@@ -57,10 +56,10 @@ async render(){
         // Mencari elemen tombol "Next" dari carousel
         const nextButton = document.querySelector('.carousel-control-next');
 
-        // Men-trigger klik pertama pada tombol "Next" setelah 2 detik
-        setTimeout(() => {
-            nextButton.click();
-        }, 2000);
+    // Men-trigger klik pertama pada tombol "Next" setelah 2 detik
+    setTimeout(() => {
+      nextButton.click();
+    }, 1000);
 
         // Men-trigger klik pada tombol "Next" setiap 5 detik
         setInterval(() => {
@@ -93,14 +92,7 @@ const footerHome = document.querySelector('.footer-home');
       window.location.href = '/';
     });
 
-  // Add an event listener to the "Logout" button
-// components/Admin.js
-        // Add an event listener to the "Logout" button
-        const logoutButton = document.getElementById('logoutButton');
-        logoutButton.addEventListener('click', () => {
-          // Send a message to the React Native code to initiate logout
-          window.ReactNativeWebView.postMessage(JSON.stringify({ action: 'logout' }));
-        });
+
 
 
 
