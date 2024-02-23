@@ -1,6 +1,6 @@
 const Mobile = {
-async render(){
-	return `
+  async render() {
+    return `
     <div id="carouselExampleControls" class="carousel slide" data-ride="carousel">
         <div class="carousel-inner">
             <div class="carousel-item active">
@@ -29,79 +29,73 @@ async render(){
       <div class="item3">3</div>
     </div>
 
-<div class="container">
-  <div class="dd" id="lokasi"></div>
-  <div class="ff"></div>
-  <div class="gg"></div>
-  <div class="hh" onclick="window.location.href='#/info+posyandu'"></div>
-</div>
+    <div class="container">
+        <div class="dd" id="lokasi"></div>
+        <div class="ff"></div>
+        <div class="gg"></div>
+        <div class="hh" onclick="window.location.href='#/info+posyandu'"></div>
+    </div>
 
-<br><br><br>
+    <br><br><br>
 
-<footer class="mobile-footer">
-  <div class="footer text-center">
-    <img src="images/home.png" alt="Home Logo" class="footer-home">
-    <img id="info" src="images/info.png" alt="Info Logo">
-  </div>
-  <br><br>
-</footer>
-	`;
-},
-
+    <footer class="mobile-footer">
+        <div class="footer text-center">
+            <img src="images/home.png" alt="Home Logo" class="footer-home">
+            <img id="info" src="images/info.png" alt="Info Logo">
+        </div>
+        <br><br>
+    </footer>
+    `;
+  },
 
   async afterRender() {
+    // Mencari elemen tombol "Next" dari carousel
+    const nextButton = document.querySelector('.carousel-control-next');
 
-        // Mencari elemen tombol "Next" dari carousel
-        const nextButton = document.querySelector('.carousel-control-next');
+    // Men-trigger klik pertama pada tombol "Next" setelah 2 detik
+    setTimeout(() => {
+      nextButton.click();
+    }, 1000);
 
-        // Men-trigger klik pertama pada tombol "Next" setelah 2 detik
-        setTimeout(() => {
-            nextButton.click();
-        }, 2000);
+    // Mengaktifkan fungsi Carousel otomatis
+    $('#carouselExampleControls').carousel({
+      interval: 5000 // Menyetel interval carousel menjadi 2 detik
+    });
 
-        // Men-trigger klik pada tombol "Next" setiap 5 detik
-        setInterval(() => {
-            nextButton.click();
-        }, 5000);
+    const isAdminSession = sessionStorage.getItem("isAdmin");
+    // Check if the user is an admin based on the local storage item
+    const isAdminLocalStorage = localStorage.getItem("isAdmin");
 
+    if (isAdminSession === "true" || isAdminLocalStorage === "true") {
+      // Redirect to the admin page
+      window.location.href = '/#/admin';
+    }
 
-  const isAdminSession = sessionStorage.getItem("isAdmin");
-
-        // Check if the user is an admin based on the local storage item
-        const isAdminLocalStorage = localStorage.getItem("isAdmin");
-
-        if (isAdminSession === "true" || isAdminLocalStorage === "true") {
-            // Redirect to the admin page
-            window.location.href = '/#/admin';
-        }
-
-
-  const gps = document.getElementById('lokasi')
+    const gps = document.getElementById('lokasi')
     gps.addEventListener('click', () => {
       window.location.href = 'https://www.google.com/maps/search/posyandu+terdekat/';
     });
 
-const ggDiv = document.querySelector('.gg');
+    const ggDiv = document.querySelector('.gg');
     ggDiv.addEventListener('click', () => {
       window.location.href = 'https://ayosehat.kemkes.go.id/home';
     });
 
-const ffDiv = document.querySelector('.ff');
+    const ffDiv = document.querySelector('.ff');
     ffDiv.addEventListener('click', () => {
       window.location.href = 'pengumuman-page-user.html';
     });
 
-const login = document.querySelector('.item3');
+    const login = document.querySelector('.item3');
     login.addEventListener('click', () => {
       window.location.href = 'login.html';
-    }); 
+    });
 
-const footerHome = document.querySelector('.footer-home');
+    const footerHome = document.querySelector('.footer-home');
     footerHome.addEventListener('click', () => {
       window.location.href = '/';
-    });   
+    });
   },
 };
 
 export default Mobile;
-
