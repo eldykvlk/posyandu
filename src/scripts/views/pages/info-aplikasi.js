@@ -18,14 +18,35 @@ const InfoAplikasi = {
             </div>
 
             <h3 class="mt-4 mb-2" id="h3posyandu2">Bentuk kepedulian mahasiswa dengan masyarakat</h3>
-            <p id="pposyandu2">Universitas Pamulang, diwakili oleh mahasiswa, Eldy Effendi, menunjukkan bentuk kepeduliannya terhadap masyarakat melalui pengembangan aplikasi Posyandu ini. Dengan menyediakan akses mudah terhadap informasi kesehatan dan pelayanan posyandu, mahasiswa dari Universitas Pamulang berkontribusi secara langsung dalam meningkatkan kesejahteraan masyarakat.</p>
+           
+           <p id="pposyandu2">Universitas Pamulang, diwakili oleh mahasiswa, Eldy Effendi, menunjukkan bentuk kepeduliannya terhadap masyarakat melalui pengembangan aplikasi Posyandu ini. Dengan menyediakan akses mudah terhadap informasi kesehatan dan pelayanan posyandu, mahasiswa dari Universitas Pamulang berkontribusi secara langsung dalam meningkatkan kesejahteraan masyarakat.</p>
+          <br><br><br><br><br>
           </div>
         </div>
-      </div>`;
+      </div>
+
+        <br><br><br>
+          <footer class="mobile-footer">
+        <div class="footer text-center">
+            <img src="images/home.png" alt="Home Logo" class="footer-home">
+            <img id="info" src="images/info.png" alt="Info Logo" class="footer-info">
+        </div>
+        <br><br>
+    </footer>`;
   },
 
   async afterRender() {
-    window.scrollTo(0, 0); 
+    window.scrollTo(0, 0);
+
+    const footerHome = document.querySelector('.footer-home');
+    footerHome.addEventListener('click', () => {
+      window.location.href = '/';
+    });
+
+    const footerInfo = document.querySelector('.footer-info');
+    footerInfo.addEventListener('click', () => {
+      window.location.href = '/#/info+aplikasi';
+    });
   },
 };
 
