@@ -48,7 +48,7 @@ const Mobile = {
   },
 
   async afterRender() {
-    // Mencari elemen tombol "Next" dari carousel
+
     const nextButton = document.querySelector('.carousel-control-next');
 
     // Men-trigger klik pertama pada tombol "Next" setelah 2 detik
@@ -58,44 +58,61 @@ const Mobile = {
 
     // Mengaktifkan fungsi Carousel otomatis
     $('#carouselExampleControls').carousel({
-      interval: 5000 // Menyetel interval carousel menjadi 2 detik
+      interval: 5000 // Menyetel interval carousel menjadi 5 detik
     });
 
-    const isAdminSession = sessionStorage.getItem("isAdmin");
-    // Check if the user is an admin based on the local storage item
-    const isAdminLocalStorage = localStorage.getItem("isAdmin");
+    // Klik otomatis pada tombol "Next" setiap 5 detik
+  const carouselInterval = setInterval(() => {
+    const nextButton = document.querySelector('.carousel-control-next');
+    nextButton.click();
+  }, 5000);
 
-    if (isAdminSession === "true" || isAdminLocalStorage === "true") {
-      // Redirect to the admin page
-      window.location.href = '/#/admin';
-    }
+    window.addEventListener('hashchange', () => {
+    clearInterval(carouselInterval);
+  });
 
-    const gps = document.getElementById('lokasi')
-    gps.addEventListener('click', () => {
-      window.location.href = 'https://www.google.com/maps/search/posyandu+terdekat/';
-    });
-
-    const ggDiv = document.querySelector('.gg');
-    ggDiv.addEventListener('click', () => {
-      window.location.href = 'https://ayosehat.kemkes.go.id/home';
-    });
-
-    const ffDiv = document.querySelector('.ff');
-    ffDiv.addEventListener('click', () => {
-      window.location.href = 'pengumuman-page-user.html';
-    });
-
-
-    const footerHome = document.querySelector('.footer-home');
-    footerHome.addEventListener('click', () => {
-      window.location.href = '/';
-    });
-
+    // Mengaktifkan fungsi untuk pengalihan halaman pada tombol "Info Aplikasi"
     const footerInfo = document.querySelector('.footer-info');
     footerInfo.addEventListener('click', () => {
       window.location.href = '/#/info+aplikasi';
     });
 
+    // Mengaktifkan fungsi untuk pengalihan halaman pada tombol "Info Posyandu"
+    const hhDiv = document.querySelector('.hh');
+    hhDiv.addEventListener('click', () => {
+      window.location.href = '/#/info+posyandu';
+    });
+
+    // Mengaktifkan fungsi untuk pengalihan halaman pada tombol "Home"
+    const footerHome = document.querySelector('.footer-home');
+    footerHome.addEventListener('click', () => {
+      window.location.href = '/';
+    });
+
+    // Mengaktifkan fungsi untuk pengalihan halaman pada tombol "GPS"
+    const gps = document.getElementById('lokasi');
+    gps.addEventListener('click', () => {
+      window.location.href = 'https://www.google.com/maps/search/posyandu+terdekat/';
+    });
+
+    // Mengaktifkan fungsi untuk pengalihan halaman pada tombol "gg"
+    const ggDiv = document.querySelector('.gg');
+    ggDiv.addEventListener('click', () => {
+      window.location.href = 'https://ayosehat.kemkes.go.id/home';
+    });
+
+    // Mengaktifkan fungsi untuk pengalihan halaman pada tombol "ff"
+    const ffDiv = document.querySelector('.ff');
+    ffDiv.addEventListener('click', () => {
+      window.location.href = 'pengumuman-page-user.html';
+    });
+
+    // Check apakah pengguna adalah admin
+    const isAdminSession = sessionStorage.getItem("isAdmin");
+    const isAdminLocalStorage = localStorage.getItem("isAdmin");
+    if (isAdminSession === "true" || isAdminLocalStorage === "true") {
+      window.location.href = '/#/admin';
+    }
   },
 };
 
