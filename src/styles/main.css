@@ -322,3 +322,13 @@ h3#h3posyandu1, h3#h3posyandu2 {
     font-weight: bold;
     color: lightseagreen;
 }
+
+img#imgLogoInfo {
+    max-width: 70%;
+    height: auto;
+}
+
+img#imgLogounpam {
+    max-width: 40%;
+    height: auto;
+}

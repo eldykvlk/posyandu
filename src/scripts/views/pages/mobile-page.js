@@ -40,7 +40,7 @@ const Mobile = {
     <footer class="mobile-footer">
         <div class="footer text-center">
             <img src="images/home.png" alt="Home Logo" class="footer-home">
-            <img id="info" src="images/info.png" alt="Info Logo">
+            <img id="info" src="images/info.png" alt="Info Logo" class="footer-info">
         </div>
         <br><br>
     </footer>
@@ -90,6 +90,12 @@ const Mobile = {
     footerHome.addEventListener('click', () => {
       window.location.href = '/';
     });
+
+    const footerInfo = document.querySelector('.footer-info');
+    footerInfo.addEventListener('click', () => {
+      window.location.href = '/#/info+aplikasi';
+    });
+
   },
 };
 
