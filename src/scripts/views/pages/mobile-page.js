@@ -51,10 +51,15 @@ const Mobile = {
 
     const nextButton = document.querySelector('.carousel-control-next');
 
-    // Men-trigger klik pertama pada tombol "Next" setelah 2 detik
-    setTimeout(() => {
-      nextButton.click();
-    }, 1000);
+    // Men-trigger klik pertama pada tombol "Next" setelah 1 detik
+    const intervalPertama = setTimeout(() => {
+     const nextButton = document.querySelector('.carousel-control-next');
+    nextButton.click();
+  }, 1000);
+
+    window.addEventListener('hashchange', () => {
+    clearInterval(intervalPertama);
+  });
 
     // Mengaktifkan fungsi Carousel otomatis
     $('#carouselExampleControls').carousel({
@@ -86,7 +91,7 @@ const Mobile = {
     // Mengaktifkan fungsi untuk pengalihan halaman pada tombol "Home"
     const footerHome = document.querySelector('.footer-home');
     footerHome.addEventListener('click', () => {
-      window.location.href = '/';
+      window.location.href = '/#/';
     });
 
     // Mengaktifkan fungsi untuk pengalihan halaman pada tombol "GPS"

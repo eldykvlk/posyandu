@@ -43,7 +43,7 @@ async render(){
 <footer class="mobile-footer">
   <div class="footer text-center">
     <img src="images/home.png" alt="Home Logo" class="footer-home">
-    <img id="info" src="images/info.png" alt="Info Logo">
+    <img id="info" src="images/info.png" alt="Info Logo" class="footer-info">
   </div>
   <br><br>
 </footer>
@@ -53,18 +53,32 @@ async render(){
 
   async afterRender() {
 
-        // Mencari elemen tombol "Next" dari carousel
-        const nextButton = document.querySelector('.carousel-control-next');
+ const nextButton = document.querySelector('.carousel-control-next');
 
-    // Men-trigger klik pertama pada tombol "Next" setelah 2 detik
-    setTimeout(() => {
-      nextButton.click();
-    }, 1000);
+    // Men-trigger klik pertama pada tombol "Next" setelah 1 detik
+    const intervalPertama = setTimeout(() => {
+     const nextButton = document.querySelector('.carousel-control-next');
+    nextButton.click();
+  }, 1000);
 
-        // Men-trigger klik pada tombol "Next" setiap 5 detik
-        setInterval(() => {
-            nextButton.click();
-        }, 5000);
+    window.addEventListener('hashchange', () => {
+    clearInterval(intervalPertama);
+  });
+
+    // Mengaktifkan fungsi Carousel otomatis
+    $('#carouselExampleControls').carousel({
+      interval: 5000 // Menyetel interval carousel menjadi 5 detik
+    });
+
+    // Klik otomatis pada tombol "Next" setiap 5 detik
+  const carouselInterval = setInterval(() => {
+    const nextButton = document.querySelector('.carousel-control-next');
+    nextButton.click();
+  }, 5000);
+
+    window.addEventListener('hashchange', () => {
+    clearInterval(carouselInterval);
+  });
         
   const gps = document.getElementById('lokasi')
     gps.addEventListener('click', () => {
@@ -87,9 +101,14 @@ const iiDiv = document.querySelector('.ii');
       window.location.href = 'https://script.google.com/macros/s/AKfycbwvxkszbmmgUDABEVNdt--an3iuF-t7HFiCSNFJstUyTSslcoP8rdM8M0VKl4XNPnbA/exec';
     });
 
-const footerHome = document.querySelector('.footer-home');
+    const footerHome = document.querySelector('.footer-home');
     footerHome.addEventListener('click', () => {
-      window.location.href = '/';
+      window.location.href = '/#/admin';
+    });
+
+    const footerInfo = document.querySelector('.footer-info');
+    footerInfo.addEventListener('click', () => {
+      window.location.href = '/#/admin+info+aplikasi';
     });
 
 
