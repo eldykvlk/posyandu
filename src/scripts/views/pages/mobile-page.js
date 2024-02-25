@@ -121,7 +121,7 @@ const Mobile = {
         const whatsappShareLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(link)}`;
 
         // Mengarahkan pengguna ke WhatsApp untuk membagikan tautan
-        window.location.href = whatsappShareLink;
+           window.open(whatsappShareLink, '_blank');
     });
 
   },
