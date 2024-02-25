@@ -111,7 +111,17 @@ const iiDiv = document.querySelector('.ii');
       window.location.href = '/#/admin+info+aplikasi';
     });
 
+    const bagikan = document.querySelector('.item1');
+    bagikan.addEventListener('click', () => {
+        // Tautan yang akan dibagikan
+        const link = 'https://drive.google.com/file/d/1N2pSyCoZhDvY-RQ0HE3EYEv5H0G27I0V/view?usp=sharing';
 
+        // Membuat tautan untuk membagikan ke WhatsApp
+        const whatsappShareLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(link)}`;
+
+        // Mengarahkan pengguna ke WhatsApp untuk membagikan tautan
+        window.location.href = whatsappShareLink;
+    });
 
 
 
