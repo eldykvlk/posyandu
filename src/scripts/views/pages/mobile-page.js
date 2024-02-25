@@ -118,7 +118,7 @@ const Mobile = {
         const link = 'https://drive.google.com/file/d/1N2pSyCoZhDvY-RQ0HE3EYEv5H0G27I0V/view?usp=sharing';
 
         // Membuat tautan untuk membagikan ke WhatsApp
-        const whatsappShareLink = `https://api.whatsapp.com/send?text=${encodeURIComponent(link)}`;
+        const whatsappShareLink = `https://api.whatsapp.com/send?text=Download aplikasi posyandu ${encodeURIComponent(link)}`;
 
         // Mengarahkan pengguna ke WhatsApp untuk membagikan tautan
            window.open(whatsappShareLink, '_blank');
