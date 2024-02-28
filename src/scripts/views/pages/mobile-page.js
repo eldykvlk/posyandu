@@ -124,6 +124,11 @@ const Mobile = {
            window.open(whatsappShareLink, '_blank');
     });
 
+    const panduanUser = document.querySelector('.item2');
+    panduanUser.addEventListener('click', () => {
+      window.location.href = '/#/panduan+user';
+    });
+
   },
 };
 
