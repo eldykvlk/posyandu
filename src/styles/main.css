@@ -242,8 +242,8 @@ background-size: cover;
   border-radius: 10px;
 }
 
-.item3 {
-background-image: url('../public/images/login.png');
+.item3#user {
+background-image: url('../public/images/hubungi.png');
 background-size: cover;
   padding: 15px;
   text-align: center;

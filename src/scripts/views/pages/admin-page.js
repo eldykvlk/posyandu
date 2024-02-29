@@ -97,9 +97,10 @@ const ffadmDiv = document.querySelector('.ff#pengumuman-admin');
     });
 
 const iiDiv = document.querySelector('.ii');
-    iiDiv.addEventListener('click', () => {
-      window.location.href = 'https://script.google.com/macros/s/AKfycbwvxkszbmmgUDABEVNdt--an3iuF-t7HFiCSNFJstUyTSslcoP8rdM8M0VKl4XNPnbA/exec';
-    });
+iiDiv.addEventListener('click', () => {
+  window.open('https://script.google.com/macros/s/AKfycbwvxkszbmmgUDABEVNdt--an3iuF-t7HFiCSNFJstUyTSslcoP8rdM8M0VKl4XNPnbA/exec', '_blank');
+});
+
 
     const footerHome = document.querySelector('.footer-home');
     footerHome.addEventListener('click', () => {

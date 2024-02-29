@@ -26,6 +26,7 @@ const Mobile = {
     <div class="wrapper">
       <div class="item1" styles="background-images : url('imgmobile/kontak.png');"></div>
       <div class="item2"></div>
+      <div class="item3" id="user"></div>
     </div>
 
     <div class="container">
