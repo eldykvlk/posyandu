@@ -332,3 +332,16 @@ img#imgLogounpam {
     max-width: 40%;
     height: auto;
 }
+
+h1#hubungikami {
+    border: 8px solid lightblue;
+    border-radius: 20px;
+    font-size: 30px;
+    font-weight: bold;
+    color: lightseagreen;
+}
+
+
+    .card#hubungi {
+      border-radius: 15px;
+    }

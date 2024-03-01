@@ -130,6 +130,12 @@ const Mobile = {
       window.location.href = '/#/panduan+user';
     });
 
+    const hubungi = document.querySelector('.item3#user');
+    hubungi.addEventListener('click', () => {
+      window.location.href = '/#/hubungi';
+    });
+
+
   },
 };
 

@@ -28,7 +28,8 @@ async render(){
 
     <div class="wrapper" id="wrapperadmin">
       <div class="item1"></div>
-      <div class="item2"></div>
+      <div class="item2" id="admin"></div>
+      <div class="item3" id="user"></div>
     </div>
 
 <div class="container" id="contadmin">
@@ -124,7 +125,10 @@ iiDiv.addEventListener('click', () => {
             window.open(whatsappShareLink, '_blank');
     });
 
-
+    const hubungi = document.querySelector('.item3');
+    hubungi.addEventListener('click', () => {
+      window.location.href = '/#/hubungi';
+    });
 
   },
 };
