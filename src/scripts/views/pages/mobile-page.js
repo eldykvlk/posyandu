@@ -25,8 +25,10 @@ const Mobile = {
 
     <div class="wrapper">
       <div class="item1" styles="background-images : url('imgmobile/kontak.png');"></div>
-      <div class="item2"></div>
+      <div class="item4"></div>
       <div class="item3" id="user"></div>
+      <div class="item2"></div>
+
     </div>
 
     <div class="container">
@@ -135,6 +137,10 @@ const Mobile = {
       window.location.href = '/#/hubungi';
     });
 
+    const cariBalita = document.querySelector('.item4');
+    cariBalita.addEventListener('click', () => {
+      window.location.href = 'https://script.google.com/macros/s/AKfycbzoS7OPFHaunR79uYmFyXCOcKXUHhW5EKIrnYdZ592zRlZmNURhTPqaXkZ8bqWEChhC/exec';
+    });    
 
   },
 };
