@@ -113,6 +113,11 @@ iiDiv.addEventListener('click', () => {
       window.location.href = '/#/admin+info+aplikasi';
     });
 
+    const panduanAdmin = document.querySelector('.item2#admin');
+    panduanAdmin.addEventListener('click', () => {
+      window.location.href = '/#/panduan+admin';
+    });
+
     const bagikan = document.querySelector('.item1');
     bagikan.addEventListener('click', () => {
         // Tautan yang akan dibagikan
