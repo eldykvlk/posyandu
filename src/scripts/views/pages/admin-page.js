@@ -99,7 +99,7 @@ const ffadmDiv = document.querySelector('.ff#pengumuman-admin');
 
 const iiDiv = document.querySelector('.ii');
 iiDiv.addEventListener('click', () => {
-  window.open('https://script.google.com/macros/s/AKfycbyjeGc0mUK9z2hLaMKJxDX2Di0KJVgbcFoMudNyJpTAsjrv0b86amGVxVemGkKvU7xV/exec', '_blank');
+  window.open('https://script.google.com/macros/s/AKfycbxHM5rylWedtQ37A_wAxrKHQ_KtiWi_nNNbtwj6U5isos3hNwFIlkNKK2GKvnvMJIXV/exec', '_blank');
 });
 
 
