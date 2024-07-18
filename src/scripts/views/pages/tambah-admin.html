@@ -1,0 +1,140 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Registrasi Admin</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Tambah kader administrasi</h2>
+        <form id="registerForm" class="mb-4">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Tambah</button>
+        </form>
+
+        <h3>Tambah kader administrasi</h3>
+        <table id="adminTable" class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Username</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Daftar admin akan diisi di sini -->
+            </tbody>
+        </table>
+    </div>
+
+    <!-- Modal Bootstrap -->
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Registrasi Berhasil</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Admin berhasil dibuat dengan ID: <span id="adminId"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        async function fetchAdmins() {
+            const response = await fetch('https://login-ca414-default-rtdb.firebaseio.com/users.json');
+            const data = await response.json();
+            const tableBody = document.getElementById('adminTable').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = ''; // Kosongkan tabel sebelum diisi
+
+            for (let userId in data) {
+                if (data[userId].role === 'admin') {
+                    const row = tableBody.insertRow();
+                    const cellUsername = row.insertCell(0);
+                    const cellAction = row.insertCell(1);
+                    cellUsername.textContent = data[userId].username;
+
+                    // Membuat tombol hapus
+                    const deleteButton = document.createElement('button');
+                    deleteButton.textContent = 'Hapus';
+                    deleteButton.className = 'btn btn-danger btn-sm';
+                    deleteButton.onclick = async function() {
+                        await deleteAdmin(userId);
+                    };
+                    cellAction.appendChild(deleteButton);
+                }
+            }
+        }
+
+        async function registerAdmin(username, password) {
+            const response = await fetch('https://login-ca414-default-rtdb.firebaseio.com/users.json');
+            const data = await response.json();
+
+            const adminId = 'adminId' + Math.floor(Math.random() * 1000000); // ID acak
+
+            const newAdmin = {
+                password: password,
+                role: 'admin',
+                username: username
+            };
+
+            await fetch(`https://login-ca414-default-rtdb.firebaseio.com/users/${adminId}.json`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newAdmin)
+            });
+
+            return adminId; // Mengembalikan ID admin baru
+        }
+
+        async function deleteAdmin(adminId) {
+            await fetch(`https://login-ca414-default-rtdb.firebaseio.com/users/${adminId}.json`, {
+                method: 'DELETE'
+            });
+            fetchAdmins(); // Memperbarui daftar admin setelah penghapusan
+        }
+
+        document.getElementById('registerForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Mencegah reload halaman
+            const username = document.getElementById('username').value;
+            const password = document.getElementById('password').value;
+
+            const adminId = await registerAdmin(username, password);
+            if (adminId) {
+                document.getElementById('adminId').textContent = adminId;
+                $('#successModal').modal('show'); // Tampilkan modal
+                document.getElementById('registerForm').reset();
+                fetchAdmins(); // Memperbarui tabel admin
+            } else {
+                alert("Registrasi gagal!");
+            }
+        });
+
+        // Panggil fetchAdmins saat halaman dimuat
+        window.onload = fetchAdmins;
+    </script>
+
+    <!-- Bootstrap JS dan dependensi -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

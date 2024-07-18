@@ -354,3 +354,11 @@ h1#hubungikami {
     .card#hubungi {
       border-radius: 15px;
     }
+
+.item4#tambah {
+background-image: url('../public/images/tambah.jpg');
+background-size: cover;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+}

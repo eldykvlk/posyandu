@@ -30,6 +30,7 @@ async render(){
       <div class="item1"></div>
       <div class="item2" id="admin"></div>
       <div class="item3" id="user"></div>
+      <div class="item4" id="tambah"></div>      
     </div>
 
 <div class="container" id="contadmin">
@@ -133,6 +134,11 @@ iiDiv.addEventListener('click', () => {
     const hubungi = document.querySelector('.item3');
     hubungi.addEventListener('click', () => {
       window.location.href = '/#/hubungi';
+    });
+
+    const tambah = document.querySelector('.item4');
+    tambah.addEventListener('click', () => {
+      window.location.href = 'tambah-admin.html';
     });
 
   },
