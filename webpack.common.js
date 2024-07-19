@@ -59,6 +59,11 @@ module.exports = {
       template: path.resolve(__dirname, 'src/scripts/views/pages/tambah-admin.html'),
       inject: false,
     }),
+    new HtmlWebpackPlugin({
+      filename: 'masuk.html',
+      template: path.resolve(__dirname, 'src/scripts/views/pages/masuk.html'),
+      inject: false,
+    }),
     new CopyWebpackPlugin({
       patterns: [
         {
