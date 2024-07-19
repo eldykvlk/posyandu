@@ -118,7 +118,7 @@ const Mobile = {
     const bagikan = document.querySelector('.item1');
     bagikan.addEventListener('click', () => {
         // Tautan yang akan dibagikan
-        const link = 'https://drive.google.com/file/d/1N2pSyCoZhDvY-RQ0HE3EYEv5H0G27I0V/view?usp=sharing';
+        const link = 'https://drive.google.com/file/d/13bGE26G6uGxRZ-_HZEAS5kkhYHkVTldj/view?usp=sharing';
 
         // Membuat tautan untuk membagikan ke WhatsApp
         const whatsappShareLink = `https://api.whatsapp.com/send?text=Download aplikasi posyandu ${encodeURIComponent(link)}`;
