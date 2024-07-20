@@ -65,7 +65,7 @@
             if (role) {
                 console.log(`Login sukses! Role: ${role}`);
                 const token = btoa(`${username}:${role}`); // Encode token (username dan role)
-                window.location.href = `https://script.google.com/macros/s/AKfycbzn4rud5mqINDMz42Xe6PRjXSGbor4LOi5C5EoxJ8E/dev?token=${token}`;
+                window.location.href = `https://script.google.com/macros/s/AKfycbzQvlTvDQRaWKt1Zj68ghbEjMnH_2dByjnobkHuztkbnZBep_AteKbe6P4trx6BJdLM/exec?token=${token}`;
             } else {
                 $('#errorModal').modal('show'); // Tampilkan modal saat login gagal
             }
