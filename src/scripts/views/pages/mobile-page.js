@@ -139,7 +139,7 @@ const Mobile = {
 
     const cariBalita = document.querySelector('.item4');
     cariBalita.addEventListener('click', () => {
-      window.location.href = 'https://script.google.com/macros/s/AKfycbz_g_VYbuG-XiywI-_LTAeV556yrLzpzgfxrHKWE40axVOG-mPRpG2KLltOoYeDL30/exec';
+      window.location.href = 'https://script.google.com/macros/s/AKfycbyLS7kuc7S0E_cIIHdU-ASnYF84O-ZLwXD_CGuYsIbSWiE4fEk7mM7pwH9I-tnyBsJQ/exec';
     });    
 
   },
