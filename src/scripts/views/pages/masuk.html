@@ -66,7 +66,7 @@
                 console.log(`Login sukses! Role: ${role}`);
                 const expirationTime = Date.now() + 3600000; // Token valid selama 1 jam
                 const token = btoa(`${username}:${role}:${expirationTime}`); // Encode token (username, role, dan expirationTime)
-                window.location.href = `https://script.google.com/macros/s/AKfycbzKLtLVpFkTHB1CssToWg1jWCk7-90Tskyklbqmku4Mk2c3q0sYNGgm28rdOrJiKuK5/exec?token=${token}`;
+                window.location.href = `https://script.google.com/macros/s/AKfycbwsxKlhL2zS42HdgGf4rMLaqtO_JAK22CV-AKOoLGpKEywd8e0nBEOH_2daP1OAEzdv/exec?token=${token}`;
             } else {
                 $('#errorModal').modal('show'); // Tampilkan modal saat login gagal
             }
