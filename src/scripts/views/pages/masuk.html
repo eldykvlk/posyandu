@@ -9,7 +9,7 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h2 class="text-center">Login Posyandu (Kader pencatat)</h2>
+        <h2 class="text-center">Login</h2>
         <form id="loginForm" class="mx-auto" style="max-width: 400px;">
             <div class="form-group">
                 <label for="username">Username:</label>
@@ -45,7 +45,7 @@
 
     <script>
         async function login(username, password) {
-            const response = await fetch('https://login-ca414-default-rtdb.firebaseio.com/users.json');
+            const response = await fetch('https://login-56b5b-default-rtdb.firebaseio.com/login.json?auth=RjUW5ZVhu41vvQwR1LOOxxcWYcvHqUg2mmqj4BZC');
             const data = await response.json();
             
             for (let userId in data) {
@@ -64,9 +64,13 @@
             const role = await login(username, password);
             if (role) {
                 console.log(`Login sukses! Role: ${role}`);
-                const expirationTime = Date.now() + 3600000; // Token valid selama 1 jam
-                const token = btoa(`${username}:${role}:${expirationTime}`); // Encode token (username, role, dan expirationTime)
-                window.location.href = `https://script.google.com/macros/s/AKfycbwsxKlhL2zS42HdgGf4rMLaqtO_JAK22CV-AKOoLGpKEywd8e0nBEOH_2daP1OAEzdv/exec?token=${token}`;
+                if (role === 'admin') {
+                    window.location.href = 'admin.html'; // Ganti dengan URL admin yang sesuai
+                } else if (role === 'ketua') {
+                    window.location.href = 'ketua.html'; // Ganti dengan URL ketua yang sesuai
+                } else {
+                    $('#errorModal').modal('show'); // Tampilkan modal saat role tidak dikenali
+                }
             } else {
                 $('#errorModal').modal('show'); // Tampilkan modal saat login gagal
             }

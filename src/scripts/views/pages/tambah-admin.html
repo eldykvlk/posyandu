@@ -3,13 +3,13 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Registrasi Admin</title>
+    <title>Tambah Akun</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
 </head>
 <body>
     <div class="container mt-5">
-        <h2 class="text-center">Tambah kader administrasi</h2>
+        <h2 class="text-center">Tambah Akun</h2>
         <form id="registerForm" class="mb-4">
             <div class="form-group">
                 <label for="username">Username:</label>
@@ -19,24 +19,33 @@
                 <label for="password">Password:</label>
                 <input type="password" id="password" name="password" class="form-control" required>
             </div>
+            <div class="form-group">
+                <label for="role">Role:</label>
+                <select id="role" name="role" class="form-control" required>
+                    <option value="" disabled selected>Pilih Role</option>
+                    <option value="admin">Admin</option>
+                    <option value="ketua">Ketua</option>
+                </select>
+            </div>
             <button type="submit" class="btn btn-primary">Tambah</button>
         </form>
 
-        <h3>Tambah kader administrasi</h3>
+        <h3>Daftar Akun</h3>
         <table id="adminTable" class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
                     <th>Username</th>
+                    <th>Role</th>
                     <th>Aksi</th>
                 </tr>
             </thead>
             <tbody>
-                <!-- Daftar admin akan diisi di sini -->
+                <!-- Daftar akun akan diisi di sini -->
             </tbody>
         </table>
     </div>
 
-    <!-- Modal Bootstrap -->
+    <!-- Modal Bootstrap untuk Success -->
     <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
         <div class="modal-dialog" role="document">
             <div class="modal-content">
@@ -47,7 +56,27 @@
                     </button>
                 </div>
                 <div class="modal-body">
-                    Admin berhasil dibuat dengan ID: <span id="adminId"></span>
+                    Akun berhasil dibuat dengan ID: <span id="accountId"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Bootstrap untuk Error -->
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Registrasi Gagal</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Terjadi kesalahan saat membuat akun.
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
@@ -57,79 +86,86 @@
     </div>
 
     <script>
-        async function fetchAdmins() {
-            const response = await fetch('https://login-ca414-default-rtdb.firebaseio.com/users.json');
+        async function fetchAccounts() {
+            const response = await fetch('https://login-56b5b-default-rtdb.firebaseio.com/login.json?auth=RjUW5ZVhu41vvQwR1LOOxxcWYcvHqUg2mmqj4BZC');
             const data = await response.json();
             const tableBody = document.getElementById('adminTable').getElementsByTagName('tbody')[0];
             tableBody.innerHTML = ''; // Kosongkan tabel sebelum diisi
 
             for (let userId in data) {
-                if (data[userId].role === 'admin') {
-                    const row = tableBody.insertRow();
-                    const cellUsername = row.insertCell(0);
-                    const cellAction = row.insertCell(1);
-                    cellUsername.textContent = data[userId].username;
+                const row = tableBody.insertRow();
+                const cellUsername = row.insertCell(0);
+                const cellRole = row.insertCell(1);
+                const cellAction = row.insertCell(2);
 
-                    // Membuat tombol hapus
-                    const deleteButton = document.createElement('button');
-                    deleteButton.textContent = 'Hapus';
-                    deleteButton.className = 'btn btn-danger btn-sm';
-                    deleteButton.onclick = async function() {
-                        await deleteAdmin(userId);
-                    };
-                    cellAction.appendChild(deleteButton);
-                }
+                cellUsername.textContent = data[userId].username;
+                cellRole.textContent = data[userId].role;
+
+                // Membuat tombol hapus
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Hapus';
+                deleteButton.className = 'btn btn-danger btn-sm';
+                deleteButton.onclick = async function() {
+                    await deleteAccount(userId);
+                };
+                cellAction.appendChild(deleteButton);
             }
         }
 
-        async function registerAdmin(username, password) {
-            const response = await fetch('https://login-ca414-default-rtdb.firebaseio.com/users.json');
+        async function registerAccount(username, password, role) {
+            const response = await fetch('https://login-56b5b-default-rtdb.firebaseio.com/login.json?auth=RjUW5ZVhu41vvQwR1LOOxxcWYcvHqUg2mmqj4BZC');
             const data = await response.json();
 
-            const adminId = 'adminId' + Math.floor(Math.random() * 1000000); // ID acak
+            const newAccountId = 'accountId' + Math.floor(Math.random() * 1000000); // ID acak
 
-            const newAdmin = {
+            const newAccount = {
                 password: password,
-                role: 'admin',
+                role: role,
                 username: username
             };
 
-            await fetch(`https://login-ca414-default-rtdb.firebaseio.com/users/${adminId}.json`, {
+            await fetch(`https://login-56b5b-default-rtdb.firebaseio.com/login/${newAccountId}.json?auth=RjUW5ZVhu41vvQwR1LOOxxcWYcvHqUg2mmqj4BZC`, {
                 method: 'PUT',
                 headers: {
                     'Content-Type': 'application/json'
                 },
-                body: JSON.stringify(newAdmin)
+                body: JSON.stringify(newAccount)
             });
 
-            return adminId; // Mengembalikan ID admin baru
+            return newAccountId; // Mengembalikan ID akun baru
         }
 
-        async function deleteAdmin(adminId) {
-            await fetch(`https://login-ca414-default-rtdb.firebaseio.com/users/${adminId}.json`, {
+        async function deleteAccount(accountId) {
+            await fetch(`https://login-56b5b-default-rtdb.firebaseio.com/login/${accountId}.json?auth=RjUW5ZVhu41vvQwR1LOOxxcWYcvHqUg2mmqj4BZC`, {
                 method: 'DELETE'
             });
-            fetchAdmins(); // Memperbarui daftar admin setelah penghapusan
+            fetchAccounts(); // Memperbarui daftar akun setelah penghapusan
         }
 
         document.getElementById('registerForm').addEventListener('submit', async function(event) {
             event.preventDefault(); // Mencegah reload halaman
             const username = document.getElementById('username').value;
             const password = document.getElementById('password').value;
+            const role = document.getElementById('role').value;
 
-            const adminId = await registerAdmin(username, password);
-            if (adminId) {
-                document.getElementById('adminId').textContent = adminId;
+            if (!role) {
+                $('#errorModal').modal('show');
+                return;
+            }
+
+            const accountId = await registerAccount(username, password, role);
+            if (accountId) {
+                document.getElementById('accountId').textContent = accountId;
                 $('#successModal').modal('show'); // Tampilkan modal
                 document.getElementById('registerForm').reset();
-                fetchAdmins(); // Memperbarui tabel admin
+                fetchAccounts(); // Memperbarui tabel akun
             } else {
-                alert("Registrasi gagal!");
+                $('#errorModal').modal('show'); // Tampilkan modal error
             }
         });
 
-        // Panggil fetchAdmins saat halaman dimuat
-        window.onload = fetchAdmins;
+        // Panggil fetchAccounts saat halaman dimuat
+        window.onload = fetchAccounts;
     </script>
 
     <!-- Bootstrap JS dan dependensi -->
