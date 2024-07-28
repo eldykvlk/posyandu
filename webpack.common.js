@@ -64,6 +64,11 @@ module.exports = {
       template: path.resolve(__dirname, 'src/scripts/views/pages/masuk.html'),
       inject: false,
     }),
+    new HtmlWebpackPlugin({
+      filename: 'hal-ketua.html',
+      template: path.resolve(__dirname, 'src/scripts/views/pages/hal-ketua.html'),
+      inject: false,
+    }),
     new CopyWebpackPlugin({
       patterns: [
         {
