@@ -69,6 +69,11 @@ module.exports = {
       template: path.resolve(__dirname, 'src/scripts/views/pages/hal-ketua.html'),
       inject: false,
     }),
+    new HtmlWebpackPlugin({
+      filename: 'laporan-admin.html',
+      template: path.resolve(__dirname, 'src/scripts/views/pages/laporan-admin.html'),
+      inject: false,
+    }),
     new CopyWebpackPlugin({
       patterns: [
         {
