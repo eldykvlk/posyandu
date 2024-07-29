@@ -71,7 +71,7 @@ module.exports = {
     }),
     new HtmlWebpackPlugin({
       filename: 'hal-admin.html',
-      template: path.resolve(__dirname, 'src/scripts/views/pages/hal-ketua.html'),
+      template: path.resolve(__dirname, 'src/scripts/views/pages/hal-admin.html'),
       inject: false,
     }),
     new HtmlWebpackPlugin({
