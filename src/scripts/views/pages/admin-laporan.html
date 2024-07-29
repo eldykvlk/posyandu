@@ -1,0 +1,388 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Kegiatan</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Isi Laporan Kegiatan</h2>
+        <form id="kegiatanForm" class="mb-4">
+            <div class="form-group">
+                <label for="nama_kegiatan">Nama Kegiatan:</label>
+                <input type="text" id="nama_kegiatan" name="nama_kegiatan" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="tanggal">Tanggal:</label>
+                <input type="date" id="tanggal" name="tanggal" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="pendaftar_peserta">Pendaftar Peserta:</label>
+                <input type="text" id="pendaftar_peserta" name="pendaftar_peserta" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="penyuluhan">Penyuluhan:</label>
+                <input type="text" id="penyuluhan" name="penyuluhan" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="penimbang_bayi_1">Penimbang Bayi 1:</label>
+                <input type="text" id="penimbang_bayi_1" name="penimbang_bayi_1" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="penimbang_bayi_2">Penimbang Bayi 2:</label>
+                <input type="text" id="penimbang_bayi_2" name="penimbang_bayi_2" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="pengukur_bayi">Pengukur Bayi:</label>
+                <input type="text" id="pengukur_bayi" name="pengukur_bayi" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="pencatat_kms">Pencatat KMS:</label>
+                <input type="text" id="pencatat_kms" name="pencatat_kms" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="pencatat_laporan">Pencatat Laporan:</label>
+                <input type="text" id="pencatat_laporan" name="pencatat_laporan" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="pelayanan_posyandu">Pelayanan Posyandu:</label>
+                <input type="text" id="pelayanan_posyandu" name="pelayanan_posyandu" class="form-control" required>
+            </div>
+            <button type="submit" class="btn btn-primary">Tambah</button>
+        </form>
+
+        <h3>Laporan Kegiatan</h3>
+        <table id="kegiatanTable" class="table table-bordered">
+            <thead class="thead-dark">
+                <tr>
+                    <th>Nama Kegiatan</th>
+                    <th>Tanggal</th>
+                    <th>Pendaftar Peserta</th>
+                    <th>Penyuluhan</th>
+                    <th>Penimbang Bayi 1</th>
+                    <th>Penimbang Bayi 2</th>
+                    <th>Pengukur Bayi</th>
+                    <th>Pencatat KMS</th>
+                    <th>Pencatat Laporan</th>
+                    <th>Pelayanan Posyandu</th>
+                    <th>Aksi</th>
+                </tr>
+            </thead>
+            <tbody>
+                <!-- Daftar kegiatan akan diisi di sini -->
+            </tbody>
+        </table>
+        <nav>
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous" onclick="prevPage()">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next" onclick="nextPage()">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Modal Bootstrap untuk Success -->
+    <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="successModalLabel">Kegiatan Berhasil Ditambahkan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Kegiatan berhasil ditambahkan dengan ID: <span id="kegiatanId"></span>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Bootstrap untuk Edit -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Laporan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editKegiatanForm">
+                        <input type="hidden" id="edit_kegiatan_id">
+                        <div class="form-group">
+                            <label for="edit_nama_kegiatan">Nama Kegiatan:</label>
+                            <input type="text" id="edit_nama_kegiatan" name="edit_nama_kegiatan" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_tanggal">Tanggal:</label>
+                            <input type="date" id="edit_tanggal" name="edit_tanggal" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_pendaftar_peserta">Pendaftar Peserta:</label>
+                            <input type="text" id="edit_pendaftar_peserta" name="edit_pendaftar_peserta" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_penyuluhan">Penyuluhan:</label>
+                            <input type="text" id="edit_penyuluhan" name="edit_penyuluhan" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_penimbang_bayi_1">Penimbang Bayi 1:</label>
+                            <input type="text" id="edit_penimbang_bayi_1" name="edit_penimbang_bayi_1" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_penimbang_bayi_2">Penimbang Bayi 2:</label>
+                            <input type="text" id="edit_penimbang_bayi_2" name="edit_penimbang_bayi_2" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_pengukur_bayi">Pengukur Bayi:</label>
+                            <input type="text" id="edit_pengukur_bayi" name="edit_pengukur_bayi" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_pencatat_kms">Pencatat KMS:</label>
+                            <input type="text" id="edit_pencatat_kms" name="edit_pencatat_kms" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_pencatat_laporan">Pencatat Laporan:</label>
+                            <input type="text" id="edit_pencatat_laporan" name="edit_pencatat_laporan" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="edit_pelayanan_posyandu">Pelayanan Posyandu:</label>
+                            <input type="text" id="edit_pelayanan_posyandu" name="edit_pelayanan_posyandu" class="form-control" required>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Simpan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal Bootstrap untuk Error -->
+    <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="errorModalLabel">Kegiatan Gagal Ditambahkan</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    Terjadi kesalahan saat menambahkan kegiatan.
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        const pageSize = 5;
+        let currentPage = 1;
+        let kegiatanData = {};
+
+        async function fetchKegiatan() {
+            const response = await fetch('https://login-56b5b-default-rtdb.firebaseio.com/laporan.json?auth=RjUW5ZVhu41vvQwR1LOOxxcWYcvHqUg2mmqj4BZC');
+            kegiatanData = await response.json();
+            renderTable();
+        }
+
+        function renderTable() {
+            const tableBody = document.getElementById('kegiatanTable').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = ''; // Kosongkan tabel sebelum diisi
+
+            const keys = Object.keys(kegiatanData);
+            const start = (currentPage - 1) * pageSize;
+            const end = start + pageSize;
+            const pageData = keys.slice(start, end);
+
+            pageData.forEach((kegiatanId) => {
+                const kegiatan = kegiatanData[kegiatanId];
+                const row = tableBody.insertRow();
+                row.insertCell(0).textContent = kegiatan.nama_kegiatan;
+                row.insertCell(1).textContent = kegiatan.tanggal;
+                row.insertCell(2).textContent = kegiatan.pendaftar_peserta;
+                row.insertCell(3).textContent = kegiatan.penyuluhan;
+                row.insertCell(4).textContent = kegiatan.penimbang_bayi_1;
+                row.insertCell(5).textContent = kegiatan.penimbang_bayi_2;
+                row.insertCell(6).textContent = kegiatan.pengukur_bayi;
+                row.insertCell(7).textContent = kegiatan.pencatat_kms;
+                row.insertCell(8).textContent = kegiatan.pencatat_laporan;
+                row.insertCell(9).textContent = kegiatan.pelayanan_posyandu;
+
+                const cellAction = row.insertCell(10);
+                // Tombol Edit
+                const editButton = document.createElement('button');
+                editButton.textContent = 'Edit';
+                editButton.className = 'btn btn-warning btn-sm mr-2';
+                editButton.onclick = function() {
+                    showEditModal(kegiatanId, kegiatan);
+                };
+                cellAction.appendChild(editButton);
+
+                // Tombol Hapus
+                const deleteButton = document.createElement('button');
+                deleteButton.textContent = 'Hapus';
+                deleteButton.className = 'btn btn-danger btn-sm';
+                deleteButton.onclick = async function() {
+                    await deleteKegiatan(kegiatanId);
+                };
+                cellAction.appendChild(deleteButton);
+            });
+        }
+
+        async function tambahKegiatan(nama_kegiatan, tanggal, pendaftar_peserta, penyuluhan, penimbang_bayi_1, penimbang_bayi_2, pengukur_bayi, pencatat_kms, pencatat_laporan, pelayanan_posyandu) {
+            const newKegiatanId = 'kegiatanId' + Math.floor(Math.random() * 1000000); // ID acak
+
+            const newKegiatan = {
+                nama_kegiatan: nama_kegiatan,
+                tanggal: tanggal,
+                pendaftar_peserta: pendaftar_peserta,
+                penyuluhan: penyuluhan,
+                penimbang_bayi_1: penimbang_bayi_1,
+                penimbang_bayi_2: penimbang_bayi_2,
+                pengukur_bayi: pengukur_bayi,
+                pencatat_kms: pencatat_kms,
+                pencatat_laporan: pencatat_laporan,
+                pelayanan_posyandu: pelayanan_posyandu
+            };
+
+            await fetch(`https://login-56b5b-default-rtdb.firebaseio.com/laporan/${newKegiatanId}.json?auth=RjUW5ZVhu41vvQwR1LOOxxcWYcvHqUg2mmqj4BZC`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newKegiatan)
+            });
+
+            return newKegiatanId; // Mengembalikan ID kegiatan baru
+        }
+
+        async function editKegiatan(kegiatanId, nama_kegiatan, tanggal, pendaftar_peserta, penyuluhan, penimbang_bayi_1, penimbang_bayi_2, pengukur_bayi, pencatat_kms, pencatat_laporan, pelayanan_posyandu) {
+            const updatedKegiatan = {
+                nama_kegiatan: nama_kegiatan,
+                tanggal: tanggal,
+                pendaftar_peserta: pendaftar_peserta,
+                penyuluhan: penyuluhan,
+                penimbang_bayi_1: penimbang_bayi_1,
+                penimbang_bayi_2: penimbang_bayi_2,
+                pengukur_bayi: pengukur_bayi,
+                pencatat_kms: pencatat_kms,
+                pencatat_laporan: pencatat_laporan,
+                pelayanan_posyandu: pelayanan_posyandu
+            };
+
+            await fetch(`https://login-56b5b-default-rtdb.firebaseio.com/laporan/${kegiatanId}.json?auth=RjUW5ZVhu41vvQwR1LOOxxcWYcvHqUg2mmqj4BZC`, {
+                method: 'PATCH',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedKegiatan)
+            });
+
+            fetchKegiatan(); // Memperbarui daftar kegiatan setelah pengeditan
+        }
+
+        async function deleteKegiatan(kegiatanId) {
+            await fetch(`https://login-56b5b-default-rtdb.firebaseio.com/laporan/${kegiatanId}.json?auth=RjUW5ZVhu41vvQwR1LOOxxcWYcvHqUg2mmqj4BZC`, {
+                method: 'DELETE'
+            });
+            fetchKegiatan(); // Memperbarui daftar kegiatan setelah penghapusan
+        }
+
+        document.getElementById('kegiatanForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Mencegah reload halaman
+            const nama_kegiatan = document.getElementById('nama_kegiatan').value;
+            const tanggal = document.getElementById('tanggal').value;
+            const pendaftar_peserta = document.getElementById('pendaftar_peserta').value;
+            const penyuluhan = document.getElementById('penyuluhan').value;
+            const penimbang_bayi_1 = document.getElementById('penimbang_bayi_1').value;
+            const penimbang_bayi_2 = document.getElementById('penimbang_bayi_2').value;
+            const pengukur_bayi = document.getElementById('pengukur_bayi').value;
+            const pencatat_kms = document.getElementById('pencatat_kms').value;
+            const pencatat_laporan = document.getElementById('pencatat_laporan').value;
+            const pelayanan_posyandu = document.getElementById('pelayanan_posyandu').value;
+
+            const kegiatanId = await tambahKegiatan(nama_kegiatan, tanggal, pendaftar_peserta, penyuluhan, penimbang_bayi_1, penimbang_bayi_2, pengukur_bayi, pencatat_kms, pencatat_laporan, pelayanan_posyandu);
+            if (kegiatanId) {
+                document.getElementById('kegiatanId').textContent = kegiatanId;
+                $('#successModal').modal('show'); // Tampilkan modal
+                document.getElementById('kegiatanForm').reset();
+                fetchKegiatan(); // Memperbarui tabel kegiatan
+            } else {
+                $('#errorModal').modal('show'); // Tampilkan modal error
+            }
+        });
+
+        document.getElementById('editKegiatanForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Mencegah reload halaman
+            const kegiatanId = document.getElementById('edit_kegiatan_id').value;
+            const nama_kegiatan = document.getElementById('edit_nama_kegiatan').value;
+            const tanggal = document.getElementById('edit_tanggal').value;
+            const pendaftar_peserta = document.getElementById('edit_pendaftar_peserta').value;
+            const penyuluhan = document.getElementById('edit_penyuluhan').value;
+            const penimbang_bayi_1 = document.getElementById('edit_penimbang_bayi_1').value;
+            const penimbang_bayi_2 = document.getElementById('edit_penimbang_bayi_2').value;
+            const pengukur_bayi = document.getElementById('edit_pengukur_bayi').value;
+            const pencatat_kms = document.getElementById('edit_pencatat_kms').value;
+            const pencatat_laporan = document.getElementById('edit_pencatat_laporan').value;
+            const pelayanan_posyandu = document.getElementById('edit_pelayanan_posyandu').value;
+
+            await editKegiatan(kegiatanId, nama_kegiatan, tanggal, pendaftar_peserta, penyuluhan, penimbang_bayi_1, penimbang_bayi_2, pengukur_bayi, pencatat_kms, pencatat_laporan, pelayanan_posyandu);
+            $('#editModal').modal('hide'); // Sembunyikan modal setelah pengeditan
+        });
+
+        function showEditModal(kegiatanId, kegiatan) {
+            document.getElementById('edit_kegiatan_id').value = kegiatanId;
+            document.getElementById('edit_nama_kegiatan').value = kegiatan.nama_kegiatan;
+            document.getElementById('edit_tanggal').value = kegiatan.tanggal;
+            document.getElementById('edit_pendaftar_peserta').value = kegiatan.pendaftar_peserta;
+            document.getElementById('edit_penyuluhan').value = kegiatan.penyuluhan;
+            document.getElementById('edit_penimbang_bayi_1').value = kegiatan.penimbang_bayi_1;
+            document.getElementById('edit_penimbang_bayi_2').value = kegiatan.penimbang_bayi_2;
+            document.getElementById('edit_pengukur_bayi').value = kegiatan.pengukur_bayi;
+            document.getElementById('edit_pencatat_kms').value = kegiatan.pencatat_kms;
+            document.getElementById('edit_pencatat_laporan').value = kegiatan.pencatat_laporan;
+            document.getElementById('edit_pelayanan_posyandu').value = kegiatan.pelayanan_posyandu;
+            $('#editModal').modal('show'); // Tampilkan modal edit
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTable();
+            }
+        }
+
+        function nextPage() {
+            const totalPage = Math.ceil(Object.keys(kegiatanData).length / pageSize);
+            if (currentPage < totalPage) {
+                currentPage++;
+                renderTable();
+            }
+        }
+
+        fetchKegiatan(); // Panggil fungsi untuk pertama kali
+    </script>
+
+    <!-- Bootstrap JS dan jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

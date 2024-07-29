@@ -74,6 +74,11 @@ module.exports = {
       template: path.resolve(__dirname, 'src/scripts/views/pages/user-chartkms.html'),
       inject: false,
     }),
+    new HtmlWebpackPlugin({
+      filename: 'admin-laporan.html',
+      template: path.resolve(__dirname, 'src/scripts/views/pages/admin-laporan.html'),
+      inject: false,
+    }),
     new CopyWebpackPlugin({
       patterns: [
         {
