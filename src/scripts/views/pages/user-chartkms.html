@@ -1,0 +1,161 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Chart KMS Berat Badan Balita</title>
+    <style>
+        body {
+            font-family: Arial, sans-serif;
+            display: flex;
+            justify-content: center;
+            align-items: center;
+            height: 100vh;
+            margin: 0;
+            background-color: #f4f4f4;
+        }
+
+        .container {
+            width: 80%;
+            max-width: 800px;
+            margin: auto;
+            background: #fff;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.1);
+        }
+
+        canvas {
+            width: 100%;
+            height: auto;
+        }
+
+        .description {
+            margin-top: 20px;
+        }
+
+        .description h3 {
+            margin-bottom: 10px;
+        }
+
+        .description ul {
+            list-style: none;
+            padding: 0;
+        }
+
+        .description li {
+            margin-bottom: 5px;
+        }
+
+        .description span {
+            display: inline-block;
+            width: 20px;
+            height: 20px;
+            margin-right: 10px;
+        }
+
+        .blue-line {
+            background-color: blue;
+        }
+
+        .red-line {
+            background-color: red;
+        }
+
+        .green-dash {
+            background-image: linear-gradient(to right, green 50%, rgba(255,255,255,0) 50%);
+            background-size: 10px 100%;
+        }
+
+        .orange-dash {
+            background-image: linear-gradient(to right, orange 50%, rgba(255,255,255,0) 50%);
+            background-size: 10px 100%;
+        }
+    </style>
+</head>
+<body>
+    <div class="container">
+        <canvas id="kmsChart"></canvas>
+        <div class="description">
+            <h3>Penjelasan Grafik:</h3>
+            <p>Grafik ini menunjukkan kurva pertumbuhan berat badan balita berdasarkan umur. Garis biru mewakili berat badan rata-rata anak laki-laki, garis merah mewakili berat badan rata-rata anak perempuan, garis hijau putus-putus menunjukkan batas bawah normal (BGM), dan garis oranye putus-putus menunjukkan batas atas normal.</p>
+            <h3>Penjelasan Simbol:</h3>
+            <ul>
+                <li><span class="blue-line"></span> Berat Badan Laki-laki</li>
+                <li><span class="red-line"></span> Berat Badan Perempuan</li>
+                <li><span class="green-dash"></span> BGM (Batas Bawah Normal)</li>
+                <li><span class="orange-dash"></span> Garis Oranye (Batas Atas Normal)</li>
+            </ul>
+        </div>
+    </div>
+    <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
+    <script>
+        const ctx = document.getElementById('kmsChart').getContext('2d');
+        const data = {
+            labels: ['0', '1', '2', '3', '4', '5'],
+            datasets: [
+                {
+                    label: 'Berat Badan Laki-laki',
+                    data: [3.3, 4.5, 5.6, 6.4, 7.1, 7.6],
+                    borderColor: 'blue',
+                    borderWidth: 1,
+                    fill: false
+                },
+                {
+                    label: 'Berat Badan Perempuan',
+                    data: [3.2, 4.3, 5.3, 6.1, 6.7, 7.2],
+                    borderColor: 'red',
+                    borderWidth: 1,
+                    fill: false
+                },
+                {
+                    label: 'BGM',
+                    data: [2.5, 3.6, 4.5, 5.2, 5.8, 6.3],
+                    borderColor: 'green',
+                    borderWidth: 1,
+                    borderDash: [5, 5],
+                    fill: false
+                },
+                {
+                    label: 'Garis Oranye',
+                    data: [4.0, 5.2, 6.3, 7.2, 7.8, 8.3],
+                    borderColor: 'orange',
+                    borderWidth: 1,
+                    borderDash: [5, 5],
+                    fill: false
+                }
+            ]
+        };
+
+        const options = {
+            responsive: true,
+            plugins: {
+                title: {
+                    display: true,
+                    text: 'Kurva Pertumbuhan Berat Badan Balita'
+                }
+            },
+            scales: {
+                x: {
+                    title: {
+                        display: true,
+                        text: 'Umur (Bulan)'
+                    }
+                },
+                y: {
+                    title: {
+                        display: true,
+                        text: 'Berat Badan (kg)'
+                    },
+                    beginAtZero: true
+                }
+            }
+        };
+
+        const kmsChart = new Chart(ctx, {
+            type: 'line',
+            data: data,
+            options: options
+        });
+    </script>
+</body>
+</html>
