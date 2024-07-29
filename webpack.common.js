@@ -70,11 +70,6 @@ module.exports = {
       inject: false,
     }),
     new HtmlWebpackPlugin({
-      filename: 'laporan-admin.html',
-      template: path.resolve(__dirname, 'src/scripts/views/pages/laporan-admin.html'),
-      inject: false,
-    }),
-    new HtmlWebpackPlugin({
       filename: 'user-chartkms.html',
       template: path.resolve(__dirname, 'src/scripts/views/pages/user-chartkms.html'),
       inject: false,
