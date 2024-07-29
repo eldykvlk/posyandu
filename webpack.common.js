@@ -65,11 +65,6 @@ module.exports = {
       inject: false,
     }),
     new HtmlWebpackPlugin({
-      filename: 'hal-ketua.html',
-      template: path.resolve(__dirname, 'src/scripts/views/pages/hal-ketua.html'),
-      inject: false,
-    }),
-    new HtmlWebpackPlugin({
       filename: 'hal-admin.html',
       template: path.resolve(__dirname, 'src/scripts/views/pages/hal-admin.html'),
       inject: false,
