@@ -143,8 +143,8 @@ const Mobile = {
       window.location.href = 'https://script.google.com/macros/s/AKfycbyLS7kuc7S0E_cIIHdU-ASnYF84O-ZLwXD_CGuYsIbSWiE4fEk7mM7pwH9I-tnyBsJQ/exec';
     });  
 
-    const hubungi = document.querySelector('.item5');
-    hubungi.addEventListener('click', () => {
+    const kurva = document.querySelector('.item5');
+    kurva.addEventListener('click', () => {
       window.location.href = 'user-chartkms.html';
     });  
 
