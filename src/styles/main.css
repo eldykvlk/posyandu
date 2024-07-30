@@ -217,7 +217,7 @@ background-image: url('../public/images/informasi.png');
   white-space: nowrap; /* Menghindari pemisahan baris di dalam wrapper */
 }
 
-.item1, .item2, .item3, .item3#logoutButton, .item4 {
+.item1, .item2, .item3, .item3#logoutButton, .item4, .item5 {
   width: 45%; /* Setiap elemen memiliki lebar 45% dari wrapper */
   flex-shrink: 0; /* Menghindari penyusutan elemen jika ruang terbatas */
   margin-right: 5%; /* Memberi jarak antar elemen */
@@ -262,6 +262,14 @@ background-size: cover;
 
 .item4 {
 background-image: url('../public/images/cariBalita.png');
+background-size: cover;
+  padding: 15px;
+  text-align: center;
+  border-radius: 10px;
+}
+
+.item5 {
+background-image: url('../public/images/kurva.jpg');
 background-size: cover;
   padding: 15px;
   text-align: center;
