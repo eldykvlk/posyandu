@@ -6,8 +6,15 @@
   <title>Responsive Cards</title>
   <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
   <style>
-    .card img {
+    .card-img-container {
+      display: flex;
+      justify-content: center;
+      align-items: center;
       height: 200px;
+    }
+    .card-img-container img {
+      max-height: 100%;
+      max-width: 100%;
       object-fit: cover;
     }
   </style>
@@ -18,7 +25,9 @@
       <div class="col-md-3 col-sm-6 mb-4">
         <div class="card">
           <a href="https://script.google.com/macros/s/AKfycbx5SP1VbOEXNKHJcnkc75zSDpolpUVOE9ib4BQnICEkxeuacWP-9mJYzjAFJHpj8A0T/exec" class="stretched-link" target="_blank">
-            <img src="../../../public/images/catatsatu.png" style="height: 200px; width: 200px;" class="card-img-top" alt="Catat Pelayanan">
+            <div class="card-img-container">
+              <img src="../../../public/images/catatsatu.png" alt="Catat Pelayanan">
+            </div>
           </a>
           <div class="card-body">
             <h5 class="card-title">Catat Pelayanan</h5>
@@ -29,7 +38,9 @@
       <div class="col-md-3 col-sm-6 mb-4">
         <div class="card">
           <a href="admin-laporan.html" class="stretched-link">
-            <img src="../../../public/images/catat.png" style="height: 200px; width: 200px;" class="card-img-top" alt="Laporan Pelayanan">
+            <div class="card-img-container">
+              <img src="../../../public/images/catat.png" alt="Laporan Pelayanan">
+            </div>
           </a>
           <div class="card-body">
             <h5 class="card-title">Lapor Kegiatan</h5>
@@ -40,7 +51,9 @@
       <div class="col-md-3 col-sm-6 mb-4">
         <div class="card">
           <a href="pengumuman-page-admin.html" class="stretched-link">
-            <img src="../../../public/images/pengumumanlogo.png" style="height: 200px; width: 200px;" class="card-img-top" alt="Buat Pengumuman">
+            <div class="card-img-container">
+              <img src="../../../public/images/pengumumanlogo.png" alt="Buat Pengumuman">
+            </div>
           </a>
           <div class="card-body">
             <h5 class="card-title">Buat Pengumuman</h5>
@@ -51,7 +64,9 @@
       <div class="col-md-3 col-sm-6 mb-4">
         <div class="card">
           <a href="tambah-admin.html" class="stretched-link">
-            <img src="../../../public/images/adminakun.png" style="height: 200px; width: 200px;" class="card-img-top" alt="Tambah Admin">
+            <div class="card-img-container">
+              <img src="../../../public/images/adminakun.png" alt="Tambah Admin">
+            </div>
           </a>
           <div class="card-body">
             <h5 class="card-title">Tambah Admin</h5>
