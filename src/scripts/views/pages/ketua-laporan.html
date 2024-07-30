@@ -1,0 +1,114 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Manajemen Kegiatan</title>
+    <!-- Bootstrap CSS -->
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+        .table-responsive {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Laporan Kegiatan</h2>
+        <div class="table-responsive">
+            <table id="kegiatanTable" class="table table-bordered">
+                <thead class="thead-dark">
+                    <tr>
+                        <th>Nama Kegiatan</th>
+                        <th>Tanggal</th>
+                        <th>Pendaftar Peserta</th>
+                        <th>Penyuluhan</th>
+                        <th>Penimbang Bayi 1</th>
+                        <th>Penimbang Bayi 2</th>
+                        <th>Pengukur Bayi</th>
+                        <th>Pencatat KMS</th>
+                        <th>Pencatat Laporan</th>
+                        <th>Pelayanan Posyandu</th>
+                    </tr>
+                </thead>
+                <tbody>
+                    <!-- Daftar kegiatan akan diisi di sini -->
+                </tbody>
+            </table>
+        </div>
+        <nav>
+            <ul class="pagination">
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Previous" onclick="prevPage()">
+                        <span aria-hidden="true">&laquo;</span>
+                    </a>
+                </li>
+                <li class="page-item">
+                    <a class="page-link" href="#" aria-label="Next" onclick="nextPage()">
+                        <span aria-hidden="true">&raquo;</span>
+                    </a>
+                </li>
+            </ul>
+        </nav>
+    </div>
+
+    <script>
+        const pageSize = 5;
+        let currentPage = 1;
+        let kegiatanData = {};
+
+        async function fetchKegiatan() {
+            const response = await fetch('https://login-56b5b-default-rtdb.firebaseio.com/laporan.json?auth=RjUW5ZVhu41vvQwR1LOOxxcWYcvHqUg2mmqj4BZC');
+            kegiatanData = await response.json();
+            renderTable();
+        }
+
+        function renderTable() {
+            const tableBody = document.getElementById('kegiatanTable').getElementsByTagName('tbody')[0];
+            tableBody.innerHTML = ''; // Kosongkan tabel sebelum diisi
+
+            const keys = Object.keys(kegiatanData);
+            const start = (currentPage - 1) * pageSize;
+            const end = start + pageSize;
+            const pageData = keys.slice(start, end);
+
+            pageData.forEach((kegiatanId) => {
+                const kegiatan = kegiatanData[kegiatanId];
+                const row = tableBody.insertRow();
+                row.insertCell(0).textContent = kegiatan.nama_kegiatan;
+                row.insertCell(1).textContent = kegiatan.tanggal;
+                row.insertCell(2).textContent = kegiatan.pendaftar_peserta;
+                row.insertCell(3).textContent = kegiatan.penyuluhan;
+                row.insertCell(4).textContent = kegiatan.penimbang_bayi_1;
+                row.insertCell(5).textContent = kegiatan.penimbang_bayi_2;
+                row.insertCell(6).textContent = kegiatan.pengukur_bayi;
+                row.insertCell(7).textContent = kegiatan.pencatat_kms;
+                row.insertCell(8).textContent = kegiatan.pencatat_laporan;
+                row.insertCell(9).textContent = kegiatan.pelayanan_posyandu;
+            });
+        }
+
+        function prevPage() {
+            if (currentPage > 1) {
+                currentPage--;
+                renderTable();
+            }
+        }
+
+        function nextPage() {
+            const totalPage = Math.ceil(Object.keys(kegiatanData).length / pageSize);
+            if (currentPage < totalPage) {
+                currentPage++;
+                renderTable();
+            }
+        }
+
+        fetchKegiatan(); // Panggil fungsi untuk pertama kali
+    </script>
+
+    <!-- Bootstrap JS dan jQuery -->
+    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.5.4/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>
