@@ -6,6 +6,11 @@
     <title>Manajemen Kegiatan</title>
     <!-- Bootstrap CSS -->
     <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+    <style>
+                .table-responsive {
+            overflow-x: auto;
+        }
+    </style>
 </head>
 <body>
     <div class="container mt-5">
@@ -55,6 +60,7 @@
         </form>
 
         <h3>Laporan Kegiatan</h3>
+    <div class="table-responsive">
         <table id="kegiatanTable" class="table table-bordered">
             <thead class="thead-dark">
                 <tr>
@@ -75,6 +81,7 @@
                 <!-- Daftar kegiatan akan diisi di sini -->
             </tbody>
         </table>
+    </div>
         <nav>
             <ul class="pagination">
                 <li class="page-item">
@@ -386,3 +393,5 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
+
