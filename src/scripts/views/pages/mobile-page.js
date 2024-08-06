@@ -145,7 +145,7 @@ const Mobile = {
 
     const kurva = document.querySelector('.item5');
     kurva.addEventListener('click', () => {
-      window.location.href = 'user-chartkms.html';
+      window.location.href = 'user_login.html';
     });  
 
   },

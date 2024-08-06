@@ -84,6 +84,16 @@ module.exports = {
       template: path.resolve(__dirname, 'src/scripts/views/pages/ketua-laporan.html'),
       inject: false,
     }),
+    new HtmlWebpackPlugin({
+      filename: 'user_login.html',
+      template: path.resolve(__dirname, 'src/scripts/views/pages/user_login.html'),
+      inject: false,
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'user_dashboard.html',
+      template: path.resolve(__dirname, 'src/scripts/views/pages/user_dashboard.html'),
+      inject: false,
+    }),
     new CopyWebpackPlugin({
       patterns: [
         {
