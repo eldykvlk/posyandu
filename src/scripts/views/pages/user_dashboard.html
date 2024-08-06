@@ -81,11 +81,12 @@
                             <tr>
                                 <th>Bulan</th>
                                 <th>Tanggal Pelayanan</th>
-                                <th>Nama Balita</th>
+                                <th>Umur Balita</th>
                                 <th>Tinggi Badan</th>
                                 <th>Berat Badan</th>
                                 <th>Lingkar Kepala</th>
                                 <th>Lingkar Lengan</th>
+                                <th>Status Gizi</th>
                             </tr>
                         </thead>
                         <tbody id="dataTable">
@@ -113,7 +114,7 @@
         async function fetchData(namaPeserta, tahunLayanan) {
             const response = await fetch('https://data-peserta-303fd-default-rtdb.firebaseio.com/peserta2024.json?auth=lNDl2qGcmnJoz7q7ru9bor2mM3UxNfuXVV21j60z');
             const data = await response.json();
-            const users = data.posyandu;
+            const users = data;
 
             let html = '';
             let labels = [];
@@ -133,26 +134,29 @@
                     // Get the first balita name for the label
                     if (user.data) {
                         for (let month of months) {
-                            for (let idPelayanan in user.data[month]) {
-                                let pelayanan = user.data[month][idPelayanan];
-                                if (new Date(pelayanan.tanggal_pelayanan).getFullYear() === parseInt(tahunLayanan)) {
-                                    if (!namaBalita) {
-                                        namaBalita = pelayanan.nama_balita; // Set namaBalita if not already set
+                            if (user.data[month]) {
+                                for (let idPelayanan in user.data[month]) {
+                                    let pelayanan = user.data[month][idPelayanan];
+                                    if (new Date(pelayanan.tanggal_pelayanan).getFullYear() === parseInt(tahunLayanan)) {
+                                        if (!namaBalita) {
+                                            namaBalita = user.nama_anak; // Set namaBalita if not already set
+                                        }
+                                        labels.push(month.charAt(0).toUpperCase() + month.slice(1));
+                                        tinggiBadanData.push(parseFloat(pelayanan.tinggi_badan));
+                                        beratBadanData.push(parseFloat(pelayanan.berat_badan));
+                                        html += `
+                                            <tr>
+                                                <td>${month.charAt(0).toUpperCase() + month.slice(1)}</td>
+                                                <td>${pelayanan.tanggal_pelayanan}</td>
+                                                <td>${pelayanan.umur_anak}</td>
+                                                <td>${pelayanan.tinggi_badan}</td>
+                                                <td>${pelayanan.berat_badan}</td>
+                                                <td>${pelayanan.lingkar_kepala}</td>
+                                                <td>${pelayanan.lingkar_lengan}</td>
+                                                <td>${pelayanan.status_gizi}</td>
+                                            </tr>
+                                        `;
                                     }
-                                    labels.push(month.charAt(0).toUpperCase() + month.slice(1));
-                                    tinggiBadanData.push(parseFloat(pelayanan.tinggi_badan));
-                                    beratBadanData.push(parseFloat(pelayanan.berat_badan));
-                                    html += `
-                                        <tr>
-                                            <td>${month.charAt(0).toUpperCase() + month.slice(1)}</td>
-                                            <td>${pelayanan.tanggal_pelayanan}</td>
-                                            <td>${pelayanan.nama_balita}</td>
-                                            <td>${pelayanan.tinggi_badan}</td>
-                                            <td>${pelayanan.berat_badan}</td>
-                                            <td>${pelayanan.lingkar_kepala}</td>
-                                            <td>${pelayanan.lingkar_lengan}</td>
-                                        </tr>
-                                    `;
                                 }
                             }
                         }
@@ -240,16 +244,10 @@
 
             // Add event listener for year selection change
             document.getElementById('tahunLayanan').addEventListener('change', function() {
-                        const selectedYear = this.value;
-                window.location.href = `user_dashboard.html?nama=${encodeURIComponent(namaPeserta)}&tahun=${selectedYear}`;
+                const selectedYear = this.value;
+                window.location.href = `user_dashboard.html?nama=${namaPeserta}&tahun=${selectedYear}`;
             });
-        }
+        };
     </script>
-
-    <!-- Bootstrap JS dan dependensi -->
-    <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
-    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
-
