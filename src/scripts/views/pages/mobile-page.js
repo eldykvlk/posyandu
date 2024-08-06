@@ -150,7 +150,7 @@ kurva.addEventListener('click', () => {
   const namaPeserta = urlParams.get('nama');
   
   // Arahkan ke halaman user_login.html dengan parameter nama
-  window.location.href = `user_login.html?nama=${encodeURIComponent(namaPeserta)}`;
+  window.location.href = `user_dashboard.html?nama=${encodeURIComponent(namaPeserta)}`;
 });
 
 
