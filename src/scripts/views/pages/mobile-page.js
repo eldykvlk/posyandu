@@ -143,10 +143,16 @@ const Mobile = {
       window.location.href = 'https://script.google.com/macros/s/AKfycbyLS7kuc7S0E_cIIHdU-ASnYF84O-ZLwXD_CGuYsIbSWiE4fEk7mM7pwH9I-tnyBsJQ/exec';
     });  
 
-    const kurva = document.querySelector('.item5');
-    kurva.addEventListener('click', () => {
-      window.location.href = 'user_login.html';
-    });  
+const kurva = document.querySelector('.item5');
+kurva.addEventListener('click', () => {
+  // Ambil parameter nama dari URL saat ini
+  const urlParams = new URLSearchParams(window.location.search);
+  const namaPeserta = urlParams.get('nama');
+  
+  // Arahkan ke halaman user_login.html dengan parameter nama
+  window.location.href = `user_login.html?nama=${encodeURIComponent(namaPeserta)}`;
+});
+
 
   },
 };

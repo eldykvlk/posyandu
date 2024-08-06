@@ -11,7 +11,7 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h2 class="text-center">Login</h2>
+        <h2 class="text-center">Login sebagai peserta</h2>
         <form id="loginForm" class="mx-auto" style="max-width: 400px;">
             <div class="form-group">
                 <label for="username">Username:</label>
@@ -22,9 +22,7 @@
                 <input type="password" id="password" name="password" class="form-control" required>
             </div>
             <button type="submit" class="btn btn-primary btn-block">Login</button>
-            <br>
-            <p style="text-align: center;">Atau</p>
-            <button type="button" class="btn btn-success btn-block" style="border-radius: 20px;" onclick="redirectToUrl()">Masuk sebagai peserta</button>
+            
         </form>
     </div>
 
@@ -82,15 +80,11 @@
 
             const namaPeserta = await login(username, password);
             if (namaPeserta) {
-                window.location.href = `user_dashboard.html?nama=${encodeURIComponent(namaPeserta)}`; // Arahkan ke halaman beranda dengan parameter query
+                window.location.href = `https://posyandu.netlify.app/?nama=${encodeURIComponent(namaPeserta)}`; // Arahkan ke halaman beranda dengan parameter query
             } else {
                 $('#errorModal').modal('show'); // Tampilkan modal saat login gagal
             }
         });
-
-        function redirectToUrl() {
-            window.location.href = 'https://posyandu.netlify.app/';
-        }
     </script>
 
     <!-- Bootstrap JS dan dependensi -->
