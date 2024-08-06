@@ -10,17 +10,34 @@
     <script src="https://www.gstatic.com/firebasejs/8.10.0/firebase-database.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
     <style>
+        body {
+            background-color: #f8f9fa;
+        }
+        h2, h3 {
+            color: #007bff;
+        }
+        .card {
+            margin-bottom: 20px;
+        }
         .chart-container {
             position: relative;
             width: 100%;
-            height: 200px; /* You can adjust the height as needed */
+            height: 300px; /* Increased height for better visibility */
             overflow-x: auto;
-        }
-        .chart-wrapper {
-            min-width: 800px; /* Adjust according to your content */
         }
         .table-responsive {
             overflow-x: auto;
+        }
+        .table th {
+            background-color: #007bff;
+            color: white;
+        }
+        .table td {
+            background-color: #e9ecef;
+        }
+        .btn-custom {
+            background-color: #28a745;
+            color: white;
         }
     </style>
 </head>
@@ -42,32 +59,40 @@
             </select>
         </div>
 
-        <h3 class="mt-4" id="dataLabel">Grafik Perkembangan</h3>
-        
-        <!-- Chart.js container -->
-        <div class="chart-container">
-            <div class="chart-wrapper">
-                <canvas id="myChart"></canvas>
+        <div class="card">
+            <div class="card-body">
+                <h3 class="mt-4" id="dataLabel">Grafik Perkembangan</h3>
+                
+                <!-- Chart.js container -->
+                <div class="chart-container">
+                    <div class="chart-wrapper">
+                        <canvas id="myChart"></canvas>
+                    </div>
+                </div>
             </div>
         </div>
 
-        <h3 class="mt-4">Data Perkembangan</h3>
-        <div class="table-responsive">
-            <table class="table table-bordered">
-                <thead>
-                    <tr>
-                        <th>Bulan</th>
-                        <th>Tanggal Pelayanan</th>
-                        <th>Nama Balita</th>
-                        <th>Tinggi Badan</th>
-                        <th>Berat Badan</th>
-                        <th>Lingkar Kepala</th>
-                        <th>Lingkar Lengan</th>
-                    </tr>
-                </thead>
-                <tbody id="dataTable">
-                </tbody>
-            </table>
+        <div class="card">
+            <div class="card-body">
+                <h3 class="mt-4">Data Perkembangan</h3>
+                <div class="table-responsive">
+                    <table class="table table-bordered">
+                        <thead>
+                            <tr>
+                                <th>Bulan</th>
+                                <th>Tanggal Pelayanan</th>
+                                <th>Nama Balita</th>
+                                <th>Tinggi Badan</th>
+                                <th>Berat Badan</th>
+                                <th>Lingkar Kepala</th>
+                                <th>Lingkar Lengan</th>
+                            </tr>
+                        </thead>
+                        <tbody id="dataTable">
+                        </tbody>
+                    </table>
+                </div>
+            </div>
         </div>
     </div>
 
@@ -215,7 +240,7 @@
 
             // Add event listener for year selection change
             document.getElementById('tahunLayanan').addEventListener('change', function() {
-                const selectedYear = this.value;
+                        const selectedYear = this.value;
                 window.location.href = `user_dashboard.html?nama=${encodeURIComponent(namaPeserta)}&tahun=${selectedYear}`;
             });
         }
@@ -224,6 +249,7 @@
     <!-- Bootstrap JS dan dependensi -->
     <script src="https://code.jquery.com/jquery-3.5.1.slim.min.js"></script>
     <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
-    <script src="https://stackpath.amazonaws.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+
