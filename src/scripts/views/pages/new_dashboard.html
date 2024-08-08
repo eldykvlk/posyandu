@@ -254,7 +254,9 @@ fetchData(namaPeserta, tahunLayanan);
 
 // Fetch data when year selection changes
 document.getElementById('tahunLayanan').addEventListener('change', (event) => {
-    fetchData(namaPeserta, event.target.value);
+    const newYear = event.target.value;
+    // Reload the page with the updated year parameter
+    window.location.href = `new_dashboard.html?nama=${namaPeserta}&tahun=${newYear}`;
 });
 
     </script>

@@ -8,39 +8,42 @@
 </head>
 <body>
     <div class="container mt-5">
-        <h2>Data Pelayanan untuk <span id="namaPesertaLabel"></span></h2>
+        <h2>Data Pelayanan</h2>
         <label for="tahunLayanan">Pilih Tahun:</label>
         <select id="tahunLayanan" class="form-control mb-3">
-            <option value="2030">2030</option>
-            <option value="2029">2029</option>
-            <option value="2028">2028</option>
-            <option value="2027">2027</option>
-            <option value="2026">2026</option>
+             <option value="2024">2024</option>
             <option value="2025">2025</option>
-            <option value="2024">2024</option>
-            <option value="2023">2023</option>
+            <option value="2026">2026</option>
+            <option value="2027">2027</option>  
+            <option value="2028">2028</option>    
+            <option value="2029">2029</option>  
+            <option value="2030">2030</option>   
         </select>
         
         <!-- Button to trigger Add Data modal -->
         <button type="button" class="btn btn-success mb-3" data-toggle="modal" data-target="#addModal">Tambah Data</button>
         
-        <table class="table table-bordered">
-            <thead>
-                <tr>
-                    <th>ID Pelayanan</th>
-                    <th>Tanggal</th>
-                    <th>Umur Anak</th>
-                    <th>Tinggi Badan</th>
-                    <th>Berat Badan</th>
-                    <th>Lingkar Kepala</th>
-                    <th>Lingkar Lengan</th>
-                    <th>Status Gizi</th>
-                    <th>Aksi</th>
-                </tr>
-            </thead>
-            <tbody id="dataTable"></tbody>
-        </table>
+        <!-- Make the table responsive -->
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID Pelayanan</th>
+                        <th>Tanggal Pelayanan</th>
+                        <th>Umur Anak</th>
+                        <th>Tinggi Badan(cm)</th>
+                        <th>Berat Badan(kg)</th>
+                        <th>Lingkar Kepala(cm)</th>
+                        <th>Lingkar Lengan(cm)</th>
+                        <th>Status Gizi</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="dataTable"></tbody>
+            </table>
+        </div>
     </div>
+
 
     <!-- Modal for adding data -->
     <div class="modal fade" id="addModal" tabindex="-1" role="dialog" aria-labelledby="addModalLabel" aria-hidden="true">
@@ -63,20 +66,20 @@
                             <input type="text" class="form-control" id="addUmurAnak" >
                         </div>
                         <div class="form-group">
-                            <label for="addTinggiBadan">Tinggi Badan</label>
-                            <input type="text" class="form-control" id="addTinggiBadan" >
+                            <label for="addTinggiBadan">Tinggi Badan(cm)</label>
+                            <input type="number" class="form-control" id="addTinggiBadan" >
                         </div>
                         <div class="form-group">
-                            <label for="addBeratBadan">Berat Badan</label>
-                            <input type="text" class="form-control" id="addBeratBadan" >
+                            <label for="addBeratBadan">Berat Badan(kg)</label>
+                            <input type="number" class="form-control" id="addBeratBadan" >
                         </div>
                         <div class="form-group">
-                            <label for="addLingkarKepala">Lingkar Kepala</label>
-                            <input type="text" class="form-control" id="addLingkarKepala" >
+                            <label for="addLingkarKepala">Lingkar Kepala(cm)</label>
+                            <input type="number" class="form-control" id="addLingkarKepala" >
                         </div>
                         <div class="form-group">
-                            <label for="addLingkarLengan">Lingkar Lengan</label>
-                            <input type="text" class="form-control" id="addLingkarLengan" >
+                            <label for="addLingkarLengan">Lingkar Lengan(cm)</label>
+                            <input type="number" class="form-control" id="addLingkarLengan" >
                         </div>
                         <div class="form-group">
                             <label for="addStatusGizi">Status Gizi</label>
@@ -110,20 +113,20 @@
                             <input type="text" class="form-control" id="editUmurAnak" >
                         </div>
                         <div class="form-group">
-                            <label for="editTinggiBadan">Tinggi Badan</label>
-                            <input type="text" class="form-control" id="editTinggiBadan" >
+                            <label for="editTinggiBadan">Tinggi Badan(cm)</label>
+                            <input type="number" class="form-control" id="editTinggiBadan" >
                         </div>
                         <div class="form-group">
-                            <label for="editBeratBadan">Berat Badan</label>
-                            <input type="text" class="form-control" id="editBeratBadan" >
+                            <label for="editBeratBadan">Berat Badan(kg)</label>
+                            <input type="number" class="form-control" id="editBeratBadan" >
                         </div>
                         <div class="form-group">
-                            <label for="editLingkarKepala">Lingkar Kepala</label>
-                            <input type="text" class="form-control" id="editLingkarKepala" >
+                            <label for="editLingkarKepala">Lingkar Kepala(cm)</label>
+                            <input type="number" class="form-control" id="editLingkarKepala" >
                         </div>
                         <div class="form-group">
-                            <label for="editLingkarLengan">Lingkar Lengan</label>
-                            <input type="text" class="form-control" id="editLingkarLengan" >
+                            <label for="editLingkarLengan">Lingkar Lengan(cm)</label>
+                            <input type="number" class="form-control" id="editLingkarLengan" >
                         </div>
                         <div class="form-group">
                             <label for="editStatusGizi">Status Gizi</label>
@@ -152,141 +155,228 @@
         let currentBulan = '';
         let currentKey = '';
 
-        function fetchData(nama, tahun) {
-            fetch(`${baseUrl}.json${authParam}`)
-                .then(response => response.json())
-                .then(data => {
-                    let peserta = null;
-                    for (const key in data) {
-                        if (data[key].nama_peserta === nama) {
-                            peserta = data[key];
-                            currentKey = key;
-                            break;
-                        }
+    function sortDataByDate(data) {
+    return data.sort((a, b) => new Date(a.tanggal_pelayanan) - new Date(b.tanggal_pelayanan));
+}
+
+function fetchData(nama, tahun) {
+    fetch(`${baseUrl}.json${authParam}`)
+        .then(response => response.json())
+        .then(data => {
+            let peserta = null;
+            for (const key in data) {
+                if (data[key].nama_peserta === nama) {
+                    peserta = data[key];
+                    currentKey = key;
+                    break;
+                }
+            }
+
+            if (!peserta || !peserta.data) {
+                document.getElementById('dataTable').innerHTML = '<tr><td colspan="9">Data tidak ditemukan.</td></tr>';
+                return;
+            }
+
+            let allPelayanan = [];
+            for (const bulan in peserta.data) {
+                for (const idPelayanan in peserta.data[bulan]) {
+                    const pelayanan = peserta.data[bulan][idPelayanan];
+                    if (new Date(pelayanan.tanggal_pelayanan).getFullYear() == tahun) {
+                        pelayanan.idPelayanan = idPelayanan;
+                        pelayanan.bulan = bulan;
+                        allPelayanan.push(pelayanan);
                     }
+                }
+            }
 
-                    if (!peserta || !peserta.data) {
-                        document.getElementById('dataTable').innerHTML = '<tr><td colspan="9">Data tidak ditemukan.</td></tr>';
-                        return;
-                    }
+            // Urutkan data berdasarkan tanggal
+            const sortedData = sortDataByDate(allPelayanan);
 
-                    const dataTable = document.getElementById('dataTable');
-                    dataTable.innerHTML = '';
+            const dataTable = document.getElementById('dataTable');
+            dataTable.innerHTML = '';
 
-                    for (const bulan in peserta.data) {
-                        for (const idPelayanan in peserta.data[bulan]) {
-                            const pelayanan = peserta.data[bulan][idPelayanan];
+            sortedData.forEach(pelayanan => {
+                const row = `
+                    <tr data-id="${pelayanan.idPelayanan}" data-bulan="${pelayanan.bulan}">
+                        <td>${pelayanan.idPelayanan}</td>
+                        <td>${pelayanan.tanggal_pelayanan}</td>
+                        <td>${pelayanan.umur_anak}</td>
+                        <td>${pelayanan.tinggi_badan}</td>
+                        <td>${pelayanan.berat_badan}</td>
+                        <td>${pelayanan.lingkar_kepala}</td>
+                        <td>${pelayanan.lingkar_lengan}</td>
+                        <td>${pelayanan.status_gizi}</td>
+                        <td>
+                            <button class="btn btn-primary editBtn">Edit</button>
+                            <button class="btn btn-danger deleteBtn">Hapus</button>
+                        </td>
+                    </tr>
+                `;
+                dataTable.insertAdjacentHTML('beforeend', row);
+            });
 
-                            if (new Date(pelayanan.tanggal_pelayanan).getFullYear() == tahun) {
-                                const row = `
-                                    <tr data-id="${idPelayanan}" data-bulan="${bulan}">
-                                        <td>${idPelayanan}</td>
-                                        <td>${pelayanan.tanggal_pelayanan || 'Belum diisi'}</td>
-                                        <td>${pelayanan.umur_anak || 'Belum diisi'}</td>
-                                        <td>${pelayanan.tinggi_badan || 'Belum diisi'}</td>
-                                        <td>${pelayanan.berat_badan || 'Belum diisi'}</td>
-                                        <td>${pelayanan.lingkar_kepala || 'Belum diisi'}</td>
-                                        <td>${pelayanan.lingkar_lengan || 'Belum diisi'}</td>
-                                        <td>${pelayanan.status_gizi || 'Belum diisi'}</td>
-                                        <td>
-                                            <button class="btn btn-primary btn-sm editBtn">Edit</button>
-                                            <button class="btn btn-danger btn-sm deleteBtn">Hapus</button>
-                                        </td>
-                                    </tr>
-                                `;
-                                dataTable.innerHTML += row;
-                            }
-                        }
-                    }
+            document.querySelectorAll('.editBtn').forEach(button => {
+                button.addEventListener('click', (e) => {
+                    const row = e.target.closest('tr');
+                    currentIdPelayanan = row.getAttribute('data-id');
+                    currentBulan = row.getAttribute('data-bulan');
+                    const pelayanan = sortedData.find(p => p.idPelayanan === currentIdPelayanan && p.bulan === currentBulan);
+
+                    document.getElementById('editTanggal').value = pelayanan.tanggal_pelayanan;
+                    document.getElementById('editUmurAnak').value = pelayanan.umur_anak;
+                    document.getElementById('editTinggiBadan').value = pelayanan.tinggi_badan;
+                    document.getElementById('editBeratBadan').value = pelayanan.berat_badan;
+                    document.getElementById('editLingkarKepala').value = pelayanan.lingkar_kepala;
+                    document.getElementById('editLingkarLengan').value = pelayanan.lingkar_lengan;
+                    document.getElementById('editStatusGizi').value = pelayanan.status_gizi;
+
+                    $('#editModal').modal('show');
                 });
-        }
+            });
 
-        $(document).ready(function() {
-            $('#namaPesertaLabel').text(namaPeserta);
-            $('#tahunLayanan').val(tahunLayanan);
+		document.querySelectorAll('.deleteBtn').forEach(button => {
+		    button.addEventListener('click', (e) => {
+		        const row = e.target.closest('tr');
+		        const idPelayanan = row.getAttribute('data-id');
+		        const bulan = row.getAttribute('data-bulan');
+
+		        fetch(`${baseUrl}/${currentKey}/data/${bulan}/${idPelayanan}.json${authParam}`, {
+		            method: 'DELETE'
+		        })
+		        .then(response => {
+		            if (response.ok) {
+		                fetchData(namaPeserta, tahunLayanan);
+		            } else {
+		                console.error('Failed to delete data');
+		            }
+		        })
+		        .catch(error => console.error('Error deleting data:', error));
+		    });
+		});
+
+        })
+        .catch(error => console.error('Error fetching data:', error));
+}
+
+
+        document.addEventListener('DOMContentLoaded', () => {
             fetchData(namaPeserta, tahunLayanan);
-
-            $('#tahunLayanan').on('change', function() {
-                fetchData(namaPeserta, $(this).val());
+            
+            document.getElementById('tahunLayanan').addEventListener('change', (e) => {
+                fetchData(namaPeserta, e.target.value);
             });
 
-            $('body').on('click', '.editBtn', function() {
-                const row = $(this).closest('tr');
-                currentIdPelayanan = row.data('id');
-                currentBulan = row.data('bulan');
-
-                $('#editTanggal').val(row.find('td:nth-child(2)').text() === 'Belum diisi' ? '' : row.find('td:nth-child(2)').text());
-                $('#editUmurAnak').val(row.find('td:nth-child(3)').text() === 'Belum diisi' ? '' : row.find('td:nth-child(3)').text());
-                $('#editTinggiBadan').val(row.find('td:nth-child(4)').text() === 'Belum diisi' ? '' : row.find('td:nth-child(4)').text());
-                $('#editBeratBadan').val(row.find('td:nth-child(5)').text() === 'Belum diisi' ? '' : row.find('td:nth-child(5)').text());
-                $('#editLingkarKepala').val(row.find('td:nth-child(6)').text() === 'Belum diisi' ? '' : row.find('td:nth-child(6)').text());
-                $('#editLingkarLengan').val(row.find('td:nth-child(7)').text() === 'Belum diisi' ? '' : row.find('td:nth-child(7)').text());
-                $('#editStatusGizi').val(row.find('td:nth-child(8)').text() === 'Belum diisi' ? '' : row.find('td:nth-child(8)').text());
-
-                $('#editModal').modal('show');
-            });
-
-            $('#editForm').on('submit', function(e) {
+            document.getElementById('addForm').addEventListener('submit', (e) => {
                 e.preventDefault();
-
-                const updatedData = {
-                    tanggal_pelayanan: $('#editTanggal').val(),
-                    umur_anak: $('#editUmurAnak').val(),
-                    tinggi_badan: $('#editTinggiBadan').val(),
-                    berat_badan: $('#editBeratBadan').val(),
-                    lingkar_kepala: $('#editLingkarKepala').val(),
-                    lingkar_lengan: $('#editLingkarLengan').val(),
-                    status_gizi: $('#editStatusGizi').val()
+                const newPelayanan = {
+                    tanggal_pelayanan: document.getElementById('addTanggal').value,
+                    umur_anak: document.getElementById('addUmurAnak').value,
+                    tinggi_badan: document.getElementById('addTinggiBadan').value,
+                    berat_badan: document.getElementById('addBeratBadan').value,
+                    lingkar_kepala: document.getElementById('addLingkarKepala').value,
+                    lingkar_lengan: document.getElementById('addLingkarLengan').value,
+                    status_gizi: document.getElementById('addStatusGizi').value
                 };
 
-                fetch(`${baseUrl}/${currentKey}/data/${currentBulan}/${currentIdPelayanan}.json${authParam}`, {
-                    method: 'PATCH',
-                    body: JSON.stringify(updatedData)
-                }).then(response => response.json())
-                  .then(() => {
-                    $('#editModal').modal('hide');
-                    fetchData(namaPeserta, $('#tahunLayanan').val());
-                  });
-            });
-
-            $('body').on('click', '.deleteBtn', function() {
-                const row = $(this).closest('tr');
-                const idPelayanan = row.data('id');
-                const bulan = row.data('bulan');
-
-                fetch(`${baseUrl}/${currentKey}/data/${bulan}/${idPelayanan}.json${authParam}`, {
-                    method: 'DELETE'
-                }).then(response => response.json())
-                  .then(() => {
-                    fetchData(namaPeserta, $('#tahunLayanan').val());
-                  });
-            });
-
-            $('#addForm').on('submit', function(e) {
-                e.preventDefault();
-
-                const newData = {
-                    tanggal_pelayanan: $('#addTanggal').val(),
-                    umur_anak: $('#addUmurAnak').val(),
-                    tinggi_badan: $('#addTinggiBadan').val(),
-                    berat_badan: $('#addBeratBadan').val(),
-                    lingkar_kepala: $('#addLingkarKepala').val(),
-                    lingkar_lengan: $('#addLingkarLengan').val(),
-                    status_gizi: $('#addStatusGizi').val()
-                };
-
-                const newBulan = new Date(newData.tanggal_pelayanan).toISOString().substring(0, 7);
+                const newBulan = new Date(newPelayanan.tanggal_pelayanan).toLocaleString('id-ID', { month: 'long' });
 
                 fetch(`${baseUrl}/${currentKey}/data/${newBulan}.json${authParam}`, {
                     method: 'POST',
-                    body: JSON.stringify(newData)
-                }).then(response => response.json())
-                  .then(() => {
+                    body: JSON.stringify(newPelayanan)
+                })
+                .then(response => response.json())
+                .then(() => {
                     $('#addModal').modal('hide');
-                    fetchData(namaPeserta, $('#tahunLayanan').val());
-                  });
+                    fetchData(namaPeserta, tahunLayanan);
+                })
+                .catch(error => console.error('Error adding data:', error));
+            });
+
+            document.getElementById('editForm').addEventListener('submit', (e) => {
+                e.preventDefault();
+                const updatedPelayanan = {
+                    tanggal_pelayanan: document.getElementById('editTanggal').value,
+                    umur_anak: document.getElementById('editUmurAnak').value,
+                    tinggi_badan: document.getElementById('editTinggiBadan').value,
+                    berat_badan: document.getElementById('editBeratBadan').value,
+                    lingkar_kepala: document.getElementById('editLingkarKepala').value,
+                    lingkar_lengan: document.getElementById('editLingkarLengan').value,
+                    status_gizi: document.getElementById('editStatusGizi').value
+                };
+
+                fetch(`${baseUrl}/${currentKey}/data/${currentBulan}/${currentIdPelayanan}.json${authParam}`, {
+                    method: 'PUT',
+                    body: JSON.stringify(updatedPelayanan)
+                })
+                .then(response => response.json())
+                .then(() => {
+                    $('#editModal').modal('hide');
+                    fetchData(namaPeserta, tahunLayanan);
+                })
+                .catch(error => console.error('Error updating data:', error));
             });
         });
+
+// Fungsi untuk menghitung status gizi berdasarkan input tinggi badan, berat badan, lingkar kepala, dan lingkar lengan
+function hitungStatusGizi() {
+    const umurAnak = parseFloat(document.getElementById('addUmurAnak').value) || 0;
+    const tinggiBadan = parseFloat(document.getElementById('addTinggiBadan').value) || 0;
+    const beratBadan = parseFloat(document.getElementById('addBeratBadan').value) || 0;
+    const lingkarKepala = parseFloat(document.getElementById('addLingkarKepala').value) || 0;
+    const lingkarLengan = parseFloat(document.getElementById('addLingkarLengan').value) || 0;
+
+    let statusGizi = 'Normal';
+
+    // Contoh aturan sederhana. Anda bisa mengganti ini dengan aturan yang lebih tepat dari tabel
+    if (beratBadan < (umurAnak * 2.5)) {
+        statusGizi = 'Gizi Buruk';
+    } else if (beratBadan > (umurAnak * 3.5)) {
+        statusGizi = 'Gizi Lebih';
+    } else if (tinggiBadan < (umurAnak * 2.7)) {
+        statusGizi = 'Gizi Kurang';
+    } else if (lingkarLengan < 12.5) {
+        statusGizi = 'Gizi Kurang';
+    } else if (lingkarKepala < 40) {
+        statusGizi = 'Gizi Kurang';
+    }
+
+    document.getElementById('addStatusGizi').value = statusGizi;
+}
+
+// Memanggil fungsi hitungStatusGizi setiap kali input berubah
+document.querySelectorAll('#addUmurAnak, #addTinggiBadan, #addBeratBadan, #addLingkarKepala, #addLingkarLengan').forEach(input => {
+    input.addEventListener('input', hitungStatusGizi);
+});
+
+// Ulangi untuk form edit
+function hitungStatusGiziEdit() {
+    const umurAnak = parseFloat(document.getElementById('editUmurAnak').value) || 0;
+    const tinggiBadan = parseFloat(document.getElementById('editTinggiBadan').value) || 0;
+    const beratBadan = parseFloat(document.getElementById('editBeratBadan').value) || 0;
+    const lingkarKepala = parseFloat(document.getElementById('editLingkarKepala').value) || 0;
+    const lingkarLengan = parseFloat(document.getElementById('editLingkarLengan').value) || 0;
+
+    let statusGizi = 'Normal';
+
+    if (beratBadan < (umurAnak * 2.5)) {
+        statusGizi = 'Gizi Buruk';
+    } else if (beratBadan > (umurAnak * 3.5)) {
+        statusGizi = 'Gizi Lebih';
+    } else if (tinggiBadan < (umurAnak * 2.7)) {
+        statusGizi = 'Gizi Kurang';
+    } else if (lingkarLengan < 12.5) {
+        statusGizi = 'Gizi Kurang';
+    } else if (lingkarKepala < 40) {
+        statusGizi = 'Gizi Kurang';
+    }
+
+    document.getElementById('editStatusGizi').value = statusGizi;
+}
+
+document.querySelectorAll('#editUmurAnak, #editTinggiBadan, #editBeratBadan, #editLingkarKepala, #editLingkarLengan').forEach(input => {
+    input.addEventListener('input', hitungStatusGiziEdit);
+});
+
     </script>
 </body>
 </html>
