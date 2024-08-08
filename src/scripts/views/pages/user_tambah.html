@@ -1,0 +1,157 @@
+<!DOCTYPE html>
+<html lang="id">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Tambah Peserta</title>
+    <link href="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css" rel="stylesheet">
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="text-center">Tambah Peserta</h2>
+<a href="user_info.html" class="btn btn-success">Lihat akun peserta</a>
+
+        <form id="tambahPesertaForm" class="mb-4">
+            <div class="form-group">
+                <label for="username">Username:</label>
+                <input type="text" id="username" name="username" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="password">Password:</label>
+                <input type="password" id="password" name="password" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="nama_peserta">Nama Peserta:</label>
+                <input type="text" id="nama_peserta" name="nama_peserta" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="nama_anak">Nama Anak:</label>
+                <input type="text" id="nama_anak" name="nama_anak" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="nama_ibu">Nama Ibu:</label>
+                <input type="text" id="nama_ibu" name="nama_ibu" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="nama_ayah">Nama Ayah:</label>
+                <input type="text" id="nama_ayah" name="nama_ayah" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="nik_anak">NIK Anak:</label>
+                <input type="text" id="nik_anak" name="nik_anak" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="nik_ibu">NIK Ibu:</label>
+                <input type="text" id="nik_ibu" name="nik_ibu" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="nik_ayah">NIK Ayah:</label>
+                <input type="text" id="nik_ayah" name="nik_ayah" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="tgl_lahir_anak">Tanggal Lahir Anak:</label>
+                <input type="date" id="tgl_lahir_anak" name="tgl_lahir_anak" class="form-control" required>
+            </div>
+            <div class="form-group">
+                <label for="alamat">Alamat:</label>
+                <textarea id="alamat" name="alamat" class="form-control" required></textarea>
+            </div>
+            <button type="submit" class="btn btn-primary">Tambah</button>
+        </form>
+
+        <!-- Modal untuk sukses -->
+        <div class="modal fade" id="successModal" tabindex="-1" role="dialog" aria-labelledby="successModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="successModalLabel">Registrasi Berhasil</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Peserta berhasil ditambahkan.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+
+        <!-- Modal untuk error -->
+        <div class="modal fade" id="errorModal" tabindex="-1" role="dialog" aria-labelledby="errorModalLabel" aria-hidden="true">
+            <div class="modal-dialog" role="document">
+                <div class="modal-content">
+                    <div class="modal-header">
+                        <h5 class="modal-title" id="errorModalLabel">Registrasi Gagal</h5>
+                        <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                            <span aria-hidden="true">&times;</span>
+                        </button>
+                    </div>
+                    <div class="modal-body">
+                        Terjadi kesalahan saat menambahkan peserta.
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-secondary" data-dismiss="modal">Tutup</button>
+                    </div>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script>
+        document.getElementById('tambahPesertaForm').addEventListener('submit', async function(event) {
+            event.preventDefault();
+            const idPeserta = 'peserta_' + Date.now();
+            const pesertaData = {
+                id_peserta: idPeserta,
+                username: document.getElementById('username').value,
+                password: document.getElementById('password').value,
+                nama_peserta: document.getElementById('nama_peserta').value,
+                nama_anak: document.getElementById('nama_anak').value,
+                nama_ibu: document.getElementById('nama_ibu').value,
+                nama_ayah: document.getElementById('nama_ayah').value,
+                nik_anak: document.getElementById('nik_anak').value,
+                nik_ibu: document.getElementById('nik_ibu').value,
+                nik_ayah: document.getElementById('nik_ayah').value,
+                tgl_lahir_anak: document.getElementById('tgl_lahir_anak').value,
+                alamat: document.getElementById('alamat').value,
+                data: {
+                    januari: {},
+                    februari: {},
+                    maret: {},
+                    april: {},
+                    mei: {},
+                    juni: {},
+                    juli: {},
+                    agustus: {},
+                    september: {},
+                    oktober: {},
+                    november: {},
+                    desember: {}
+                }
+            };
+
+            const response = await fetch('https://data-peserta-303fd-default-rtdb.firebaseio.com/pesertanew.json?auth=lNDl2qGcmnJoz7q7ru9bor2mM3UxNfuXVV21j60z', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(pesertaData)
+            });
+
+            if (response.ok) {
+                $('#successModal').modal('show');
+                document.getElementById('tambahPesertaForm').reset();
+            } else {
+                $('#errorModal').modal('show');
+            }
+        });
+    </script>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://cdn.jsdelivr.net/npm/@popperjs/core@2.9.2/dist/umd/popper.min.js"></script>
+    <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+</body>
+</html>

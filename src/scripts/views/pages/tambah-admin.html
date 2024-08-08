@@ -25,6 +25,7 @@
                     <option value="" disabled selected>Pilih Role</option>
                     <option value="admin">Admin</option>
                     <option value="ketua">Ketua</option>
+                    <option value="staf">Staf</option>
                 </select>
             </div>
             <button type="submit" class="btn btn-primary">Tambah</button>
@@ -85,6 +86,42 @@
         </div>
     </div>
 
+    <!-- Modal Bootstrap untuk Edit -->
+    <div class="modal fade" id="editModal" tabindex="-1" role="dialog" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Akun</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <input type="hidden" id="editUserId">
+                        <div class="form-group">
+                            <label for="editUsername">Username:</label>
+                            <input type="text" id="editUsername" name="editUsername" class="form-control" required>
+                        </div>
+                        <div class="form-group">
+                            <label for="editPassword">Password:</label>
+                            <input type="text" id="editPassword" name="editPassword" class="form-control">
+                        </div>
+                        <div class="form-group">
+                            <label for="editRole">Role:</label>
+                            <select id="editRole" name="editRole" class="form-control" required>
+                                <option value="admin">Admin</option>
+                                <option value="ketua">Ketua</option>
+                                <option value="staf">Staf</option>
+                            </select>
+                        </div>
+                        <button type="submit" class="btn btn-primary">Simpan Perubahan</button>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
     <script>
         async function fetchAccounts() {
             const response = await fetch('https://login-56b5b-default-rtdb.firebaseio.com/login.json?auth=RjUW5ZVhu41vvQwR1LOOxxcWYcvHqUg2mmqj4BZC');
@@ -101,6 +138,15 @@
                 cellUsername.textContent = data[userId].username;
                 cellRole.textContent = data[userId].role;
 
+                // Membuat tombol edit
+                const editButton = document.createElement('button');
+                editButton.textContent = 'Edit';
+                editButton.className = 'btn btn-warning btn-sm mr-2';
+                editButton.onclick = function() {
+                    showEditModal(userId, data[userId]);
+                };
+                cellAction.appendChild(editButton);
+
                 // Membuat tombol hapus
                 const deleteButton = document.createElement('button');
                 deleteButton.textContent = 'Hapus';
@@ -112,34 +158,13 @@
             }
         }
 
-        async function registerAccount(username, password, role) {
-            const response = await fetch('https://login-56b5b-default-rtdb.firebaseio.com/login.json?auth=RjUW5ZVhu41vvQwR1LOOxxcWYcvHqUg2mmqj4BZC');
-            const data = await response.json();
+        function showEditModal(userId, userData) {
+            document.getElementById('editUserId').value = userId;
+            document.getElementById('editUsername').value = userData.username;
+            document.getElementById('editPassword').value = userData.password; // Tampilkan password saat edit
+            document.getElementById('editRole').value = userData.role;
 
-            const newAccountId = 'accountId' + Math.floor(Math.random() * 1000000); // ID acak
-
-            const newAccount = {
-                password: password,
-                role: role,
-                username: username
-            };
-
-            await fetch(`https://login-56b5b-default-rtdb.firebaseio.com/login/${newAccountId}.json?auth=RjUW5ZVhu41vvQwR1LOOxxcWYcvHqUg2mmqj4BZC`, {
-                method: 'PUT',
-                headers: {
-                    'Content-Type': 'application/json'
-                },
-                body: JSON.stringify(newAccount)
-            });
-
-            return newAccountId; // Mengembalikan ID akun baru
-        }
-
-        async function deleteAccount(accountId) {
-            await fetch(`https://login-56b5b-default-rtdb.firebaseio.com/login/${accountId}.json?auth=RjUW5ZVhu41vvQwR1LOOxxcWYcvHqUg2mmqj4BZC`, {
-                method: 'DELETE'
-            });
-            fetchAccounts(); // Memperbarui daftar akun setelah penghapusan
+            $('#editModal').modal('show');
         }
 
         document.getElementById('registerForm').addEventListener('submit', async function(event) {
@@ -164,6 +189,58 @@
             }
         });
 
+        document.getElementById('editForm').addEventListener('submit', async function(event) {
+            event.preventDefault(); // Mencegah reload halaman
+            const userId = document.getElementById('editUserId').value;
+            const username = document.getElementById('editUsername').value;
+            const password = document.getElementById('editPassword').value;
+            const role = document.getElementById('editRole').value;
+
+            const updatedAccount = {
+                username: username,
+                password: password || '', // Update password jika diisi
+                role: role
+            };
+
+                        await fetch(`https://login-56b5b-default-rtdb.firebaseio.com/login/${userId}.json?auth=RjUW5ZVhu41vvQwR1LOOxxcWYcvHqUg2mmqj4BZC`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(updatedAccount)
+            });
+
+            $('#editModal').modal('hide'); // Tutup modal setelah data disimpan
+            fetchAccounts(); // Memperbarui tabel akun setelah edit
+        });
+
+        async function registerAccount(username, password, role) {
+            const newAccountId = 'accountId' + Math.floor(Math.random() * 1000000); // ID acak
+
+            const newAccount = {
+                username: username,
+                password: password,
+                role: role
+            };
+
+            await fetch(`https://login-56b5b-default-rtdb.firebaseio.com/login/${newAccountId}.json?auth=RjUW5ZVhu41vvQwR1LOOxxcWYcvHqUg2mmqj4BZC`, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(newAccount)
+            });
+
+            return newAccountId; // Mengembalikan ID akun baru
+        }
+
+        async function deleteAccount(accountId) {
+            await fetch(`https://login-56b5b-default-rtdb.firebaseio.com/login/${accountId}.json?auth=RjUW5ZVhu41vvQwR1LOOxxcWYcvHqUg2mmqj4BZC`, {
+                method: 'DELETE'
+            });
+            fetchAccounts(); // Memperbarui daftar akun setelah penghapusan
+        }
+
         // Panggil fetchAccounts saat halaman dimuat
         window.onload = fetchAccounts;
     </script>
@@ -174,3 +251,4 @@
     <script src="https://stackpath.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
 </body>
 </html>
+

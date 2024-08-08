@@ -1,0 +1,263 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Lihat Peserta</title>
+    <link rel="stylesheet" href="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/css/bootstrap.min.css">
+    <style>
+        .table-responsive {
+            overflow-x: auto;
+        }
+    </style>
+</head>
+<body>
+    <div class="container mt-5">
+        <h2 class="mb-4">Data Peserta</h2>
+        <input type="text" id="searchInput" class="form-control mb-4" placeholder="Cari peserta...">
+        <div class="table-responsive">
+            <table class="table table-bordered">
+                <thead>
+                    <tr>
+                        <th>ID Peserta</th>
+                        <th>Nama Peserta</th>
+                        <th>Nama Anak</th>
+                        <th>Aksi</th>
+                    </tr>
+                </thead>
+                <tbody id="pesertaTableBody">
+                    <!-- Data akan dimuat di sini -->
+                </tbody>
+            </table>
+        </div>
+        <nav>
+            <ul class="pagination justify-content-center" id="pagination">
+                <!-- Pagination akan dimuat di sini -->
+            </ul>
+        </nav>
+    </div>
+
+    <!-- Modal for editing data -->
+    <div class="modal fade" id="editModal" tabindex="-1" aria-labelledby="editModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h5 class="modal-title" id="editModalLabel">Edit Data Peserta</h5>
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                        <span aria-hidden="true">&times;</span>
+                    </button>
+                </div>
+                <div class="modal-body">
+                    <form id="editForm">
+                        <div class="form-group">
+                            <label for="editUsername">Username</label>
+                            <input type="text" class="form-control" id="editUsername" name="username">
+                        </div>
+                        <div class="form-group">
+                            <label for="editPassword">Password</label>
+                            <input type="text" class="form-control" id="editPassword" name="password">
+                        </div>
+                        <div class="form-group">
+                            <label for="editNamaPeserta">Nama Peserta</label>
+                            <input type="text" class="form-control" id="editNamaPeserta" name="nama_peserta">
+                        </div>
+                        <div class="form-group">
+                            <label for="editNamaAnak">Nama Anak</label>
+                            <input type="text" class="form-control" id="editNamaAnak" name="nama_anak">
+                        </div>
+                        <div class="form-group">
+                            <label for="editNamaIbu">Nama Ibu</label>
+                            <input type="text" class="form-control" id="editNamaIbu" name="nama_ibu">
+                        </div>
+                        <div class="form-group">
+                            <label for="editNamaAyah">Nama Ayah</label>
+                            <input type="text" class="form-control" id="editNamaAyah" name="nama_ayah">
+                        </div>
+                        <div class="form-group">
+                            <label for="editNikAnak">NIK Anak</label>
+                            <input type="text" class="form-control" id="editNikAnak" name="nik_anak">
+                        </div>
+                        <div class="form-group">
+                            <label for="editNikIbu">NIK Ibu</label>
+                            <input type="text" class="form-control" id="editNikIbu" name="nik_ibu">
+                        </div>
+                        <div class="form-group">
+                            <label for="editNikAyah">NIK Ayah</label>
+                            <input type="text" class="form-control" id="editNikAyah" name="nik_ayah">
+                        </div>
+                        <div class="form-group">
+                            <label for="editTglLahirAnak">Tanggal Lahir Anak</label>
+                            <input type="date" class="form-control" id="editTglLahirAnak" name="tgl_lahir_anak">
+                        </div>
+                        <div class="form-group">
+                            <label for="editAlamat">Alamat</label>
+                            <input type="text" class="form-control" id="editAlamat" name="alamat">
+                        </div>
+                        <input type="hidden" id="editId" name="id">
+                    </form>
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                    <button type="button" class="btn btn-primary" onclick="saveEdit()">Save changes</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <script src="https://code.jquery.com/jquery-3.5.1.min.js"></script>
+    <script src="https://maxcdn.bootstrapcdn.com/bootstrap/4.5.2/js/bootstrap.min.js"></script>
+    <script>
+        const dataPesertaUrl = "https://data-peserta-303fd-default-rtdb.firebaseio.com/pesertanew.json?auth=lNDl2qGcmnJoz7q7ru9bor2mM3UxNfuXVV21j60z";
+        const baseUrl = "https://data-peserta-303fd-default-rtdb.firebaseio.com/pesertanew";
+        const authParam = "?auth=lNDl2qGcmnJoz7q7ru9bor2mM3UxNfuXVV21j60z";
+        let pesertaData = [];
+        let filteredPesertaData = [];
+        let currentPage = 1;
+        const itemsPerPage = 10;
+
+        // Fetch data from Firebase
+        fetch(dataPesertaUrl)
+            .then(response => response.json())
+            .then(data => {
+                pesertaData = Object.keys(data).map(key => ({ id: key, ...data[key] }));
+                filteredPesertaData = pesertaData;
+                loadTableData();
+                setupPagination();
+            });
+
+        // Load table data
+        function loadTableData() {
+            const tableBody = document.getElementById('pesertaTableBody');
+            tableBody.innerHTML = "";
+            const start = (currentPage - 1) * itemsPerPage;
+            const end = start + itemsPerPage;
+            const paginatedData = filteredPesertaData.slice(start, end);
+
+            paginatedData.forEach(peserta => {
+                const row = `<tr>
+                    <td>${peserta.id}</td>
+                    <td>${peserta.nama_peserta}</td>
+                    <td>${peserta.nama_anak}</td>
+                    <td>
+                        <button class="btn btn-primary btn-sm" onclick="inputData('${peserta.nama_peserta}')">Input Data</button>
+                    </td>
+                </tr>`;
+                tableBody.insertAdjacentHTML('beforeend', row);
+            });
+        }
+
+        // Setup pagination
+        function setupPagination() {
+            const pagination = document.getElementById('pagination');
+            pagination.innerHTML = "";
+            const pageCount = Math.ceil(filteredPesertaData.length / itemsPerPage);
+
+            for (let i = 1; i <= pageCount; i++) {
+                const pageItem = `<li class="page-item ${i === currentPage ? 'active' : ''}">
+                    <a class="page-link" href="#" data-page="${i}">${i}</a>
+                </li>`;
+                pagination.insertAdjacentHTML('beforeend', pageItem);
+            }
+
+            document.querySelectorAll('.page-link').forEach(link => {
+                link.addEventListener('click', (e) => {
+                    e.preventDefault();
+                    currentPage = parseInt(e.target.getAttribute('data-page'));
+                    loadTableData();
+                    setupPagination();
+                });
+            });
+        }
+
+        // Search function
+        document.getElementById('searchInput').addEventListener('input', (e) => {
+            const query = e.target.value.toLowerCase();
+            if (query) {
+                filteredPesertaData = pesertaData.filter(peserta => 
+                    peserta.nama_peserta.toLowerCase().includes(query) ||
+                    peserta.nama_anak.toLowerCase().includes(query) ||
+                    peserta.id.includes(query)
+                );
+            } else {
+                filteredPesertaData = pesertaData;
+            }
+            currentPage = 1;
+            loadTableData();
+            setupPagination();
+        });
+
+        // Delete function
+        function deletePeserta(id) {
+            const url = `${baseUrl}/${id}.json${authParam}`;
+            fetch(url, {
+                method: 'DELETE'
+            })
+            .then(response => {
+                if (response.ok) {
+                    pesertaData = pesertaData.filter(peserta => peserta.id !== id);
+                    filteredPesertaData = pesertaData;
+                    loadTableData();
+                    setupPagination();
+                }
+            });
+        }
+
+        // Edit function
+        function editPeserta(id) {
+            const peserta = pesertaData.find(peserta => peserta.id === id);
+            document.getElementById('editUsername').value = peserta.username;
+            document.getElementById('editPassword').value = peserta.password;
+            document.getElementById('editNamaPeserta').value = peserta.nama_peserta;
+            document.getElementById('editNamaAnak').value = peserta.nama_anak;
+            document.getElementById('editNamaIbu').value = peserta.nama_ibu;
+            document.getElementById('editNamaAyah').value = peserta.nama_ayah;
+            document.getElementById('editNikAnak').value = peserta.nik_anak;
+            document.getElementById('editNikIbu').value = peserta.nik_ibu;
+            document.getElementById('editNikAyah').value = peserta.nik_ayah;
+            document.getElementById('editTglLahirAnak').value = peserta.tgl_lahir_anak;
+            document.getElementById('editAlamat').value = peserta.alamat;
+            document.getElementById('editId').value = peserta.id;
+            $('#editModal').modal('show');
+        }
+
+        // Save edit
+        function saveEdit() {
+            const id = document.getElementById('editId').value;
+            const editedData = {
+                username: document.getElementById('editUsername').value,
+                password: document.getElementById('editPassword').value,
+                nama_peserta: document.getElementById('editNamaPeserta').value,
+                nama_anak: document.getElementById('editNamaAnak').value,
+                nama_ibu: document.getElementById('editNamaIbu').value,
+                nama_ayah: document.getElementById('editNamaAyah').value,
+                nik_anak: document.getElementById('editNikAnak').value,
+                nik_ibu: document.getElementById('editNikIbu').value,
+                nik_ayah: document.getElementById('editNikAyah').value,
+                tgl_lahir_anak: document.getElementById('editTglLahirAnak').value,
+                alamat: document.getElementById('editAlamat').value
+            };
+            const url = `${baseUrl}/${id}.json${authParam}`;
+            fetch(url, {
+                method: 'PUT',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify(editedData)
+            })
+            .then(response => response.json())
+            .then(data => {
+                pesertaData = pesertaData.map(peserta => peserta.id === id ? { id, ...data } : peserta);
+                filteredPesertaData = pesertaData;
+                loadTableData();
+                setupPagination();
+                $('#editModal').modal('hide');
+            });
+        }
+
+        // Input Data function
+        function inputData(namaPeserta) {
+            window.location.href = `staf_input.html?nama=${encodeURIComponent(namaPeserta)}`;
+        }
+    </script>
+</body>
+</html>

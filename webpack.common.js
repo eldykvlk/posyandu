@@ -45,11 +45,6 @@ module.exports = {
       inject: false,
     }),
     new HtmlWebpackPlugin({
-      filename: 'login.html',
-      template: path.resolve(__dirname, 'src/scripts/views/pages/login.html'),
-      inject: false,
-    }),
-    new HtmlWebpackPlugin({
       filename: 'pengumuman-page-admin.html',
       template: path.resolve(__dirname, 'src/scripts/views/pages/pengumuman-page-admin.html'),
       inject: false,
@@ -92,6 +87,26 @@ module.exports = {
     new HtmlWebpackPlugin({
       filename: 'new_dashboard.html',
       template: path.resolve(__dirname, 'src/scripts/views/pages/new_dashboard.html'),
+      inject: false,
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'hal-staf.html',
+      template: path.resolve(__dirname, 'src/scripts/views/pages/hal-staf.html'),
+      inject: false,
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'staf_input.html',
+      template: path.resolve(__dirname, 'src/scripts/views/pages/staf_input.html'),
+      inject: false,
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'user_info.html',
+      template: path.resolve(__dirname, 'src/scripts/views/pages/user_info.html'),
+      inject: false,
+    }),
+    new HtmlWebpackPlugin({
+      filename: 'user_tambah.html',
+      template: path.resolve(__dirname, 'src/scripts/views/pages/user_tambah.html'),
       inject: false,
     }),
     new CopyWebpackPlugin({
