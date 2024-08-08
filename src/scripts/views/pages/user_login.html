@@ -61,7 +61,7 @@
         firebase.initializeApp(firebaseConfig);
 
         async function login(username, password) {
-            const response = await fetch('https://data-peserta-303fd-default-rtdb.firebaseio.com/peserta2024.json?auth=lNDl2qGcmnJoz7q7ru9bor2mM3UxNfuXVV21j60z');
+            const response = await fetch('https://data-peserta-303fd-default-rtdb.firebaseio.com/pesertanew.json?auth=lNDl2qGcmnJoz7q7ru9bor2mM3UxNfuXVV21j60z');
             const data = await response.json();
 
             for (let key in data) {

@@ -28,7 +28,6 @@ const Mobile = {
       <div class="item4"></div>
       <div class="item3" id="user"></div>
       <div class="item2"></div>
-      <div class="item5"></div>
 
     </div>
 
@@ -138,19 +137,19 @@ const Mobile = {
       window.location.href = '/#/hubungi';
     });
 
-    const cariBalita = document.querySelector('.item4');
-    cariBalita.addEventListener('click', () => {
-      window.location.href = 'https://script.google.com/macros/s/AKfycbyLS7kuc7S0E_cIIHdU-ASnYF84O-ZLwXD_CGuYsIbSWiE4fEk7mM7pwH9I-tnyBsJQ/exec';
-    });  
+  //  const cariBalita = document.querySelector('.item4');
+   // cariBalita.addEventListener('click', () => {
+    //  window.location.href = 'https://script.google.com/macros/s/AKfycbyLS7kuc7S0E_cIIHdU-ASnYF84O-ZLwXD_CGuYsIbSWiE4fEk7mM7pwH9I-tnyBsJQ/exec';
+   // });  
 
-const kurva = document.querySelector('.item5');
+const kurva = document.querySelector('.item4');
 kurva.addEventListener('click', () => {
   // Ambil parameter nama dari URL saat ini
   const urlParams = new URLSearchParams(window.location.search);
   const namaPeserta = urlParams.get('nama');
   
   // Arahkan ke halaman user_login.html dengan parameter nama
-  window.location.href = `user_dashboard.html?nama=${encodeURIComponent(namaPeserta)}`;
+  window.location.href = `new_dashboard.html?nama=${encodeURIComponent(namaPeserta)}`;
 });
 
 

@@ -90,8 +90,8 @@ module.exports = {
       inject: false,
     }),
     new HtmlWebpackPlugin({
-      filename: 'user_dashboard.html',
-      template: path.resolve(__dirname, 'src/scripts/views/pages/user_dashboard.html'),
+      filename: 'new_dashboard.html',
+      template: path.resolve(__dirname, 'src/scripts/views/pages/new_dashboard.html'),
       inject: false,
     }),
     new CopyWebpackPlugin({
