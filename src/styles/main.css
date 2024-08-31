@@ -109,19 +109,7 @@ body{
 
 
 
-.container {         
-       width: 80%;
-    height: 300px;
-    margin-top: 50px;
-    display: grid;
-    grid-template-columns: 1fr 1fr;
-    grid-template-rows: 1fr 1fr;
-    gap: 15px 15px;
-    grid-auto-flow: row;
-    grid-template-areas:
-        "dd ff"
-        "gg hh";
-}
+
 
 .container#contadmin {         
        width: 80%;
@@ -369,4 +357,50 @@ background-size: cover;
   padding: 15px;
   text-align: center;
   border-radius: 10px;
+}
+
+.container {
+    width: 80%;
+    height: 500px; /* Tambahkan tinggi yang sesuai dengan kebutuhan */
+    margin-top: 50px;
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    grid-template-rows: repeat(4, 1fr); /* Empat baris */
+    gap: 15px 15px;
+    grid-auto-flow: row;
+    grid-template-areas:
+        "oo ff"
+        "gg hh"
+        "dd jj"
+        "kk ll";
+    overflow-y: auto; /* Aktifkan scroll vertikal jika konten melebihi tinggi container */
+}
+
+/* Tambahkan gaya untuk kotak-kotak baru */
+.oo {
+    grid-area: oo;
+    background-image: url('../public/images/rev-pertumbuhan-anak.jpg');
+    border-radius: 20px;
+    background-size: cover;
+}
+
+.jj {
+    grid-area: jj;
+    background-image: url('../public/images/rev-bagikan-aplikasi.jpg');
+    border-radius: 20px;
+    background-size: cover;
+}
+
+.kk {
+    grid-area: kk;
+    background-image: url('../public/images/rev-hubungi-kami.jpg');
+    border-radius: 20px;
+    background-size: cover;
+}
+
+.ll {
+    grid-area: ll;
+    background-image: url('../public/images/rev-panduan-apk.jpg');
+    border-radius: 20px;
+    background-size: cover;
 }

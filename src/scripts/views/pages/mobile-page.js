@@ -23,7 +23,7 @@ const Mobile = {
         </a>
     </div>
 
-    <div class="wrapper">
+    <div class="wrapper" hidden>
       <div class="item1" styles="background-images : url('imgmobile/kontak.png');"></div>
       <div class="item4"></div>
       <div class="item3" id="user"></div>
@@ -32,10 +32,14 @@ const Mobile = {
     </div>
 
     <div class="container">
-        <div class="dd" id="lokasi"></div>
+        <div class="oo"></div>
         <div class="ff"></div>
         <div class="gg"></div>
         <div class="hh" onclick="window.location.href='#/info+posyandu'"></div>
+        <div class="dd" id="lokasi"></div> <!-- Kotak 5 -->
+        <div class="jj"></div> <!-- Kotak 6 -->
+        <div class="kk" id="user"></div> <!-- Kotak 7 -->
+        <div class="ll"></div> <!-- Kotak 8 -->
     </div>
 
     <br><br><br>
@@ -115,7 +119,7 @@ const Mobile = {
       window.location.href = 'pengumuman-page-user.html';
     });
 
-    const bagikan = document.querySelector('.item1');
+    const bagikan = document.querySelector('.jj');
     bagikan.addEventListener('click', () => {
         // Tautan yang akan dibagikan
         const link = 'https://drive.google.com/file/d/13bGE26G6uGxRZ-_HZEAS5kkhYHkVTldj/view?usp=sharing';
@@ -127,12 +131,12 @@ const Mobile = {
            window.open(whatsappShareLink, '_blank');
     });
 
-    const panduanUser = document.querySelector('.item2');
+    const panduanUser = document.querySelector('.ll');
     panduanUser.addEventListener('click', () => {
       window.location.href = '/#/panduan+user';
     });
 
-    const hubungi = document.querySelector('.item3#user');
+    const hubungi = document.querySelector('.kk');
     hubungi.addEventListener('click', () => {
       window.location.href = '/#/hubungi';
     });
@@ -142,7 +146,7 @@ const Mobile = {
     //  window.location.href = 'https://script.google.com/macros/s/AKfycbyLS7kuc7S0E_cIIHdU-ASnYF84O-ZLwXD_CGuYsIbSWiE4fEk7mM7pwH9I-tnyBsJQ/exec';
    // });  
 
-const kurva = document.querySelector('.item4');
+const kurva = document.querySelector('.oo');
 kurva.addEventListener('click', () => {
   // Ambil parameter nama dari URL saat ini
   const urlParams = new URLSearchParams(window.location.search);
@@ -151,6 +155,8 @@ kurva.addEventListener('click', () => {
   // Arahkan ke halaman user_login.html dengan parameter nama
   window.location.href = `new_dashboard.html?nama=${encodeURIComponent(namaPeserta)}`;
 });
+
+
 
 
   },
