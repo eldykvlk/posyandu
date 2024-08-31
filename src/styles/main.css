@@ -404,3 +404,11 @@ background-size: cover;
     border-radius: 20px;
     background-size: cover;
 }
+
+.container > div {
+    border-radius: 20px; /* Menambahkan border radius untuk sudut membulat */
+    background-size: cover; /* Memastikan gambar mencakup seluruh area elemen */
+    background-position: center; /* Memusatkan gambar di dalam elemen */
+    background-repeat: no-repeat; /* Menghindari pengulangan gambar */
+    overflow: hidden; /* Menghindari gambar melebihi batas elemen */
+}
