@@ -361,7 +361,7 @@ background-size: cover;
 
 .container {
     width: 80%;
-    height: 500px; /* Tambahkan tinggi yang sesuai dengan kebutuhan */
+    height: 600px; /* Tambahkan tinggi yang sesuai dengan kebutuhan */
     margin-top: 50px;
     display: grid;
     grid-template-columns: 1fr 1fr;
